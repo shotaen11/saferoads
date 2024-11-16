@@ -1,0 +1,25 @@
+<h1>新規報告</h1>
+<%= form_with model: @road_condition, local: true do |f| %>
+  <h4>道路名</h4>
+  <%= f.text_field :road_name %>
+
+  <h4>状況</h4>
+  <%= f.text_field :road_status %>
+
+  <h4>開始時間</h4>
+  <%= f.datetime_select :start_time %>
+
+  <h4>終了時間</h4>
+  <div>
+    <%= f.datetime_select :end_time %>
+    <label>
+      <%= f.check_box :end_time_undefined, {}, true, false %>
+      未定
+    </label>
+  </div>
+
+  <h4>詳細情報</h4>
+  <%= f.text_area :description %>
+
+  <%= f.submit '報告する' %>
+<% end %>
