@@ -38,6 +38,6 @@ class RoadConditionsController < ApplicationController
 
   private
   def road_conditions_params
-    params.require(:road_condition).permit(:road_name, :road_status, :description)
+    params.require(:road_condition).permit(:road_name, :road_status, :description, :image)
   end
 end

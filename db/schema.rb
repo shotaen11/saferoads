@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_16_081803) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_16_120950) do
   create_table "road_conditions", force: :cascade do |t|
     t.string "road_name"
     t.string "road_status"
@@ -19,6 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_16_081803) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "image_id"
   end
 
 end
