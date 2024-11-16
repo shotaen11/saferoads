@@ -2,4 +2,5 @@
 <p><%= @road_condition.road_name %></p>
 <h2>状況</h2>
 <p><%= @road_condition.road_status %></p>
-<%= link_to '戻る', :back %>
+<%= link_to '編集する', edit_road_condition_path(@road_condition.id) %><br>
+<%= link_to '投稿一覧ページへ', road_conditions_path %>

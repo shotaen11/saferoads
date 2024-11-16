@@ -20,6 +20,16 @@ class RoadConditionsController < ApplicationController
     @road_condition = RoadCondition.find(params[:id])
   end
 
+  def edit
+    @road_condition = RoadCondition.find(params[:id])
+  end
+
+  def update
+    road_condition = RoadCondition.find(params[:id])
+    road_condition.update(road_conditions_params)
+    redirect_to road_condition_path(road_condition)
+  end
+
   private
   def road_conditions_params
     params.require(:road_condition).permit(:road_name, :road_status, :description)

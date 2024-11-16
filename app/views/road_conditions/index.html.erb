@@ -1,5 +1,5 @@
 <h1>報告一覧</h1>
 <% @road_conditions.each do |road_condition| %>
-    <p>路線</p>
+    <p>路線名</p>
     <span><%= link_to road_condition.road_name, road_condition_path(road_condition) %></span>
 <% end %>
