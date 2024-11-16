@@ -30,6 +30,12 @@ class RoadConditionsController < ApplicationController
     redirect_to road_condition_path(road_condition)
   end
 
+  def destroy
+    road_condition = RoadCondition.find(params[:id])
+    road_condition.destroy
+    redirect_to road_conditions_path
+  end
+
   private
   def road_conditions_params
     params.require(:road_condition).permit(:road_name, :road_status, :description)
