@@ -1,9 +1,23 @@
-<h2>路線名</h2>
-<p><%= @road_condition.road_name %></p>
-<h2>状況</h2>
-<p><%= @road_condition.road_status %></p>
-<h2>画像</h2>
-<%= attachment_image_tag @road_condition, :image, format: 'jpeg', size: "300x300" %><br>
-<%= link_to '編集する', edit_road_condition_path(@road_condition.id) %><br>
-<%= link_to '削除する', road_condition_path(@road_condition.id), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？"} %><br>
-<%= link_to '投稿一覧ページへ', road_conditions_path %>
+<div class="cover-1">
+   <div class="container  align-items-center">
+    <div class="row mt-5">
+      <h1 class="font-weight-normal mt-2 mb-5">報告詳細</h1>
+    </div>
+    <div class="d-block">
+      <p class="caption">路線名</p>
+      <p class="road-name"><%= @road_condition.road_name %></p>
+
+      <p class="caption">状況</p>
+      <p class="road-status"><%= @road_condition.road_status %></p>
+
+      <p class="caption">詳細内容</p>
+      <p id="text"><%= @road_condition.description %></p>
+
+      <%= attachment_image_tag @road_condition, :image, format: 'jpeg', size: "300x300", class: "img-fluid" %><br>
+
+      <%= link_to '編集する', edit_road_condition_path(@road_condition.id), class: "btn btn-info mr-3" %>
+      <%= link_to '削除する', road_condition_path(@road_condition.id), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger" %><br>
+      <%= link_to '投稿一覧ページへ', road_conditions_path, class: "btn btn-dark mt-3" %>
+    </div>
+  </div>
+</div>
