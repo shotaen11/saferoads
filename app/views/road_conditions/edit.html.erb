@@ -1,52 +1,65 @@
 <div class="cover-1">
   <div class="container align-items-center">
+    <!-- タイトル部分 -->
     <div class="row">
       <h1 class="font-weight-normal mt-2 mb-5">報告編集</h1>
     </div>
+
+    <!-- 編集フォーム部分 -->
     <div class="row">
-    <div class="col-md-8 mx-auto">
-      <%= form_with model: @road_condition, local: true do |f| %>
+      <div class="col-md-8 mx-auto">
+        <%= form_with model: @road_condition, local: true do |f| %>
 
-      <div class="form-group mb-3">
-        <label class="form-label">【路線名】</label>
-        <%= f.text_field :road_name, class: "form-control" %>
+          <!-- 路線名 -->
+          <div class="form-group mb-3">
+            <label class="form-label">【路線名】</label>
+            <%= f.text_field :road_name, class: "form-control" %>
+          </div>
+
+          <!-- 状況 -->
+          <div class="form-group mb-3">
+            <label class="form-label">【状況】</label>
+            <%= f.select :road_status, 
+              options_for_select([['通行止', '通行止'], ['片側交互通行', '片側交互通行'], ['その他', 'その他']]), 
+              { prompt: '状況を選択してください' }, 
+              class: "form-control" %>
+          </div>
+
+          <!-- 開始時刻 -->
+          <div class="form-group mb-3">
+            <label class="form-label">【開始時刻】</label><br>   
+            <%= f.datetime_select :start_time, class: "form-control" %>
+          </div>
+
+          <!-- 終了時刻 -->
+          <div class="form-group mb-3">
+            <label class="form-label">【終了時刻】</label><br>
+            <%= f.datetime_select :end_time, class: "form-control" %>
+            <label class="form-check-label">
+              <%= f.check_box :end_time_undefined, {}, true, false %> 未定
+            </label>
+          </div>
+
+          <!-- 詳細情報 -->
+          <div class="form-group mb-3">
+            <label class="form-label">【詳細情報】</label>
+            <%= f.text_area :description, rows: 10, class: "form-control" %>
+          </div>
+
+          <!-- 画像アップロード -->
+          <div class="form-group mb-3">
+            <label class="form-label">【画像】</label><br>
+            <%= f.file_field :image, class: "form-control-file" %>
+          </div>
+
+          <!-- 保存ボタン -->
+          <%= f.submit '保存する', class: "btn btn-success" %><br>
+
+          <!-- 一覧ページリンク -->
+          <%= link_to '投稿一覧ページへ', road_conditions_path, class: "btn btn-dark" %>
+        
+        <% end %>
       </div>
-
-      <div class="form-group mb-3">
-        <label class="form-label">【状況】</label>
-        <%= f.select :road_status, 
-          options_for_select([['通行止', '通行止'], ['片側交互通行', '片側交互通行'], ['その他', 'その他']]), 
-          { prompt: '状況を選択してください' }, 
-          class: "form-control" %>
-      </div>
-
-      <div class="form-group mb-3">
-        <label class="form-label">【開始時刻】</label><br>   
-        <%= f.datetime_select :start_time, class: "form-control" %>
-      </div>
-
-      <div class="form-group mb-3">
-        <label class="form-label">【終了時刻】</label><br>
-        <%= f.datetime_select :end_time, class: "form-control" %>
-        <label class="form-check-label">
-          <%= f.check_box :end_time_undefined, {}, true, false %> 未定
-        </label>
-      </div>
-
-      <div class="form-group mb-3">
-        <label class="form-label">【詳細情報】</label>
-        <%= f.text_area :description, rows: 10, class: "form-control" %>
-      </div>
-
-      <div class="form-group mb-3">
-        <label class="form-label">【画像】</label><br>
-        <%= f.file_field :image, class: "form-control-file" %>
-      </div>
-
-      <%= f.submit '保存する', class: "btn btn-success" %><br>
-      <%= link_to '投稿一覧ページへ', road_conditions_path, class: "btn btn-dark" %>
-      <% end %>
-    </div>
     </div>
   </div> 
-</div> 
+</div>

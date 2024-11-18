@@ -1,17 +1,21 @@
 <div class="cover-1">
   <div class="container d-flex flex-column align-items-center">
+    <!-- タイトル部分 -->
     <div class="row mt-5">
       <h1 class="font-weight-normal mt-2 mb-2">新規報告</h1>
     </div>
 
+    <!-- フォーム部分 -->
     <div class="row mt-5">
       <div class="col-md-8 mx-auto">
         <%= form_with model: @road_condition, local: true do |f| %>
+          <!-- 路線名 -->
           <div class="form-group mb-3">
             <label class="form-label">【路線名】</label>
             <%= f.text_field :road_name, class: "form-control" %>
           </div>
 
+          <!-- 状況 -->
           <div class="form-group mb-3">
             <label class="form-label">【状況】</label>
             <%= f.select :road_status, 
@@ -19,12 +23,14 @@
               { prompt: '状況を選択してください' }, 
               class: "form-control" %>
           </div>
-        
+
+          <!-- 開始時刻 -->
           <div class="form-group mb-3">
             <label class="form-label">【開始時刻】</label><br>   
             <%= f.datetime_select :start_time, class: "form-control" %>
           </div>
 
+          <!-- 終了時刻 -->
           <div class="form-group mb-3">
             <label class="form-label">【終了時刻】</label><br>
             <%= f.datetime_select :end_time, class: "form-control" %>
@@ -33,16 +39,19 @@
             </label>
           </div>
 
+          <!-- 詳細情報 -->
           <div class="form-group mb-3">
             <label class="form-label">【詳細情報】</label>
             <%= f.text_area :description, rows: 10, class: "form-control" %>
           </div>
 
+          <!-- 画像 -->
           <div class="form-group mb-3">
             <label class="form-label">【画像】</label><br>
             <%= f.file_field :image, class: "form-control-file" %>
           </div>
 
+          <!-- 報告ボタン -->
           <%= f.submit '報告する', class: "btn btn-success" %>
         <% end %>
       </div>

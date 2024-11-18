@@ -1,174 +1,172 @@
-// newページ
-    .h1 {
-    font-family: 'Georgia', serif; /* フォントを指定 */
-    font-size: 36px;
-    color: #000000; /* フォントカラー */
-    font-weight: bold;
-    text-align: center; /* 中央揃え */
-    border: 2px solid #34495e; /* 枠線を追加 */
-    border-radius: 15px; /* 丸みを帯びた角 */
-    padding: 10px 20px; /* 内側の余白 */
-    margin: 0 auto; /* 中央揃え */
-    width: fit-content; /* 内容に合わせて幅を調整 */
-    background-color: #ffffff; /* 背景色を白に設定 */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 影を追加 */
-  }
-  
-// cover-1は、index以外に適用
-  .cover-1 {
-    min-height: 100vh; /* 全画面をカバー */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(223, 238, 244);
-    background-blend-mode: lighten;
-    background-size: cover; /* 背景画像が正しく拡大縮小される */
-    padding: 20px; /* 内側の余白 */
-    border-radius: 10px; /* 丸みを追加 */
-  }
-  
-  .form-label {
-    font-size: 18px; /* フォントサイズ */
-    color: #555; /* ラベルの色 */
-  }
-  
+/* newページ */
+.h1 {
+  font-family: 'Georgia', serif; /* フォントを指定 */
+  font-size: 36px;
+  color: #000000; /* フォントカラー */
+  font-weight: bold;
+  text-align: center; /* 中央揃え */
+  border: 2px solid #34495e; /* 枠線を追加 */
+  border-radius: 15px; /* 丸みを帯びた角 */
+  padding: 10px 20px; /* 内側の余白 */
+  margin: 0 auto; /* 中央揃え */
+  width: fit-content; /* 内容に合わせて幅を調整 */
+  background-color: #ffffff; /* 背景色を白に設定 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 影を追加 */
+}
+
+/* cover-1は、index以外に適用 */
+.cover-1 {
+  min-height: 100vh; /* 全画面をカバー */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(223, 238, 244);
+  background-blend-mode: lighten;
+  background-size: cover; /* 背景画像が正しく拡大縮小される */
+  padding: 20px; /* 内側の余白 */
+  border-radius: 10px; /* 丸みを追加 */
+}
+
+.form-label {
+  font-size: 18px; /* フォントサイズ */
+  color: #555; /* ラベルの色 */
+}
+
+.form-group {
+  max-width: 100%; /* 幅 */
+  width: 600px; /* 標準の幅 */
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
   .form-group {
-    max-width: 100%; /* 幅 */
-    width: 600px; /* 標準の幅 */
-    margin-bottom: 20px;
+    width: 90%; /* モバイルデバイスでの幅調整 */
   }
-  
-  @media (max-width: 768px) {
-    .form-group {
-      width: 90%; /* モバイルデバイスでの幅調整 */
-    }
-  }
+}
 
-//   indexページ
+/* indexページ */
 .cover-index {
-    min-height: 100vh; /* ページ全体をカバー */
-    background-color: #f8f9fa; /* 明るい背景色 */
-    padding: 2rem 0;
-  }
-  
-  .index-left {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* カードを中央揃え */
-    gap: 1.5rem; /* カード間の間隔 */
-  }
-  
-  .one-post {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* アニメーション */
-    border: 1px solid #ddd; /* ボーダーで区切り */
-    border-radius: 12px; /* 丸みをつける */
-    overflow: hidden; /* 画像がはみ出さないように */
-    background-color: #fff; /* カード背景 */
-  }
-  
-  .one-post:hover {
-    transform: translateY(-10px); /* カードを少し浮かせる */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* ホバー時の影 */
-  }
-  
-  .card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #343a40; /* テキスト色 */
-  }
-  
-  .road-status {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-  }
-  
-  .bg-danger {
-    background-color: #dc3545; /* 赤；通行止 */
-    color: #fff;
-  }
-  
-  .bg-info {
-    background-color: #17a2b8; /* 青；片側交互通行 */
-    color: #fff;
-  }
-  
-  .bg-warning {
-    background-color: #ffc107; /* 黄 ；その他*/
-    color: #212529;
-  }
-  
-  @media (max-width: 768px) {
-    .col-md-3 {
-      flex: 0 0 100%; /* 小画面では1列 */
-    }
-  }
-  
+  min-height: 100vh; /* ページ全体をカバー */
+  background-color: #f8f9fa; /* 明るい背景色 */
+  padding: 2rem 0;
+}
 
-//  showページ
-  .container {
-    max-width: 1200px;
-    width: 100%;
-    margin: 0 auto; /* 中央揃え */
-    padding: 0 15px; /* 端に余白を追加 */
-  } 
+.index-left {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* カードを中央揃え */
+  gap: 1.5rem; /* カード間の間隔 */
+}
 
-  .caption {
-    color: #2c3e50; /* キャプションにダークグレー色 */
-    font-size: 18px;
-    font-weight: bold; /* 強調 */
-    margin-bottom: 5px; /* 少し余白を追加 */
+.one-post {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* アニメーション */
+  border: 1px solid #ddd; /* ボーダーで区切り */
+  border-radius: 12px; /* 丸みをつける */
+  overflow: hidden; /* 画像がはみ出さないように */
+  background-color: #fff; /* カード背景 */
+}
+
+.one-post:hover {
+  transform: translateY(-10px); /* カードを少し浮かせる */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* ホバー時の影 */
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #343a40; /* テキスト色 */
+}
+
+.road-status {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.bg-danger {
+  background-color: #dc3545; /* 赤；通行止 */
+  color: #fff;
+}
+
+.bg-info {
+  background-color: #17a2b8; /* 青；片側交互通行 */
+  color: #fff;
+}
+
+.bg-warning {
+  background-color: #ffc107; /* 黄 ；その他 */
+  color: #212529;
+}
+
+@media (max-width: 768px) {
+  .col-md-3 {
+    flex: 0 0 100%; /* 小画面では1列 */
   }
-  
-  #text {
-    font-size: 18px;
-    line-height: 1.6;
-    color: #34495e; /* 詳細内容の色をダークグレー */
-    margin-bottom: 20px;
+}
+
+/* showページ */
+.container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto; /* 中央揃え */
+  padding: 0 15px; /* 端に余白を追加 */
+}
+
+.caption {
+  color: #2c3e50; /* キャプションにダークグレー色 */
+  font-size: 18px;
+  font-weight: bold; /* 強調 */
+  margin-bottom: 5px; /* 少し余白を追加 */
+}
+
+#text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #34495e; /* 詳細内容の色をダークグレー */
+  margin-bottom: 20px;
+}
+
+.road-name, .road-status {
+  font-size: 18px;
+  font-weight: normal;
+  color: #34495e; /* 路線名と状況の色をダークグレー */
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px; /* 画像下部に余白 */
+}
+
+.btn {
+  margin-top: 10px; /* ボタン間に適切な間隔 */
+  margin-bottom: 10px; /* ボタン下部にも余白 */
+}
+
+.btn-info {
+  margin-right: 10px; /* 編集ボタンと削除ボタンに間隔 */
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .cover-show {
+    padding-top: 20px; /* モバイルでは上部の余白を少し減らす */
   }
-  
-  .road-name, .road-status {
-    font-size: 18px;
-    font-weight: normal;
-    color: #34495e; /* 路線名と状況の色をダークグレー */
+
+  .caption, .road-name, .road-status {
+    font-size: 16px; /* モバイルでは少し小さく */
   }
 
   .img-fluid {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
-    margin-bottom: 20px; /* 画像下部に余白 */
+    max-width: 100%; /* モバイルでは画像のサイズを調整 */
   }
-  
-  .btn {
-    margin-top: 10px; /* ボタン間に適切な間隔 */
-    margin-bottom: 10px; /* ボタン下部にも余白 */
-  }
-  
-  .btn-info {
-    margin-right: 10px; /* 編集ボタンと削除ボタンに間隔 */
-  }
-  
-  /* レスポンシブ対応 */
-  @media (max-width: 768px) {
-    .cover-show {
-      padding-top: 20px; /* モバイルでは上部の余白を少し減らす */
-    }
-  
-    .caption, .road-name, .road-status {
-      font-size: 16px; /* モバイルでは少し小さく */
-    }
-  
-    .img-fluid {
-      max-width: 100%; /* モバイルでは画像のサイズを調整 */
-    }
-  }
+}
 
-  // ページネーション
-
+/* ページネーション */
 .page a,
 .next a,
 .last a,
@@ -191,7 +189,7 @@
   font-weight: bold;
 }
 
-// コメント
+/* コメント */
 .comments-index {
   background-color: #fff;
   border: 1px #000 solid;
