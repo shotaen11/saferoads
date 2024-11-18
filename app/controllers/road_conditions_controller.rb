@@ -13,7 +13,7 @@ class RoadConditionsController < ApplicationController
   end
 
   def index
-    @road_conditions = RoadCondition.all
+    @road_conditions = RoadCondition.page(params[:page]).reverse_order
   end
 
   def show
