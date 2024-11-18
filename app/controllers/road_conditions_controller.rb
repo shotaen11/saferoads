@@ -18,6 +18,8 @@ class RoadConditionsController < ApplicationController
 
   def show
     @road_condition = RoadCondition.find(params[:id])
+    @comment = Comment.new
+    @comments = @road_condition.comments.page(params[:page]).per(7).reverse_order
   end
 
   def edit

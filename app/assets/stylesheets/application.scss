@@ -60,3 +60,14 @@
  .nav-link {
    text-decoration: none;
  }
+
+// リンクの下線をホバー時のみにする
+ a {
+   text-decoration: none;
+ }
+ 
+ a:hover {
+   color: aqua!important;
+   text-decoration: underline;
+ }
+ 

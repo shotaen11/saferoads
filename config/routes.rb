@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   root :to => 'homes#top'
+
+  resources :road_conditions do
+    resources :comments, only:[:create, :destroy]
+  end
 end

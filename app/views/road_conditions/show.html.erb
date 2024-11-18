@@ -1,23 +1,66 @@
 <div class="cover-1">
-   <div class="container  align-items-center">
+  <div class="container">
+    <!-- タイトル部分 -->
     <div class="row mt-5">
       <h1 class="font-weight-normal mt-2 mb-5">報告詳細</h1>
     </div>
-    <div class="d-block">
-      <p class="caption">路線名</p>
-      <p class="road-name"><%= @road_condition.road_name %></p>
 
-      <p class="caption">状況</p>
-      <p class="road-status"><%= @road_condition.road_status %></p>
+    <!-- 報告詳細部分 -->
+    <div class="row">
+      <div class="col-md-12">
+        <p class="caption">路線名</p>
+        <p class="road-name"><%= @road_condition.road_name %></p>
 
-      <p class="caption">詳細内容</p>
-      <p id="text"><%= @road_condition.description %></p>
+        <p class="caption">状況</p>
+        <p class="road-status"><%= @road_condition.road_status %></p>
 
-      <%= attachment_image_tag @road_condition, :image, format: 'jpeg', size: "300x300", class: "img-fluid" %><br>
+        <p class="caption">詳細内容</p>
+        <p id="text"><%= @road_condition.description %></p>
 
-      <%= link_to '編集する', edit_road_condition_path(@road_condition.id), class: "btn btn-info mr-3" %>
-      <%= link_to '削除する', road_condition_path(@road_condition.id), data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, class: "btn btn-danger" %><br>
-      <%= link_to '投稿一覧ページへ', road_conditions_path, class: "btn btn-dark mt-3" %>
+        <%= attachment_image_tag @road_condition, :image, format: 'jpeg', size: "300x300", class: "img-fluid" %><br>
+
+        <%= link_to '編集する', edit_road_condition_path(@road_condition.id), class: "btn btn-info mr-3" %>
+        <%= link_to '削除する', road_condition_path(@road_condition.id), 
+                     data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, 
+                     class: "btn btn-danger" %><br>
+        <%= link_to '投稿一覧ページへ', road_conditions_path, class: "btn btn-dark mt-3" %>
+      </div>
+    </div>
+
+    <!-- コメント欄部分 -->
+    <div class="row mt-5">
+      <div class="col-md-12">
+        <div class="comments-section">
+          <%= form_with(model: [@road_condition, @comment], local: true) do |f| %>
+            <%= f.text_area :comment, size: "60x3", placeholder: "コメントする", class: "form-control mb-2" %>
+            <%= f.submit "送信する", class: "btn btn-success mb-4" %>
+          <% end %>
+
+          <p>コメント件数：<%= @comments.count %></p>
+
+          <!-- コメントを降順に並べ替え -->
+          <% @comments.order(created_at: :desc).each_with_index do |comment, index| %>
+            <div class="comments-index mb-2">
+              <p><strong>No.<%= @comments.count - index %></strong></p> <!-- 古い順に番号を表示 -->
+              <p><strong><%= comment.user.name %></strong></p>
+              <p class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+              <div class="d-flex">
+                <p class="flex-grow-1"><%= comment.comment %></p>
+                <% if comment.user == current_user %>
+                  <div class="comment-delete">
+                    <%= link_to "削除", 
+                                 road_condition_comment_path(comment.road_condition, comment),  
+                                 data: { turbo_method: :delete }, 
+                                 class: "btn btn-sm btn-danger" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+
+          <%= paginate @comments %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
