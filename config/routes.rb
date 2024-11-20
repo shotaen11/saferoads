@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   root :to => 'homes#top'
 
   resources :road_conditions do
-    resources :comments, only:[:create, :destroy]
-    resource :favorites, only:[:create, :destroy]    
+    resources :comments, only:[:create, :destroy] do
+     resource :comment_favorites, only: [:create, :destroy]
+  end
+    resource :favorites, only:[:create, :destroy]        
   end
 end

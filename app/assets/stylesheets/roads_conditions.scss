@@ -210,6 +210,7 @@
 //  確認しました
 .favorite_btn {
   color: #000;
+  margin-right: 10px; /* ボタン間にスペースを追加 */
 }
 
 .favorite-count {
@@ -217,3 +218,7 @@
   color: #555;
 }
 
+.favorite-btn-container {
+  display: flex;
+  align-items: center;
+}

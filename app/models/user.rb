@@ -7,4 +7,5 @@ class User < ApplicationRecord
   has_many :road_conditions, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :comment_favorites, dependent: :destroy
 end

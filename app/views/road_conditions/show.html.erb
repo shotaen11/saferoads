@@ -17,30 +17,33 @@
         <p class="caption">詳細内容</p>
         <p id="text"><%= @road_condition.description %></p>
 
-        <%= attachment_image_tag @road_condition, :image, format: 'jpeg', size: " 600x600", class: "img-fluid" %><br>
+        <%= attachment_image_tag @road_condition, :image, format: 'jpeg', size: "600x600", class: "img-fluid" %><br>
 
+        <!-- 確認ボタンの表示部分 -->
         <% if @road_condition.favorited_by?(current_user) %>
-         <%= link_to road_condition_favorites_path(@road_condition), 
-                    data: { turbo_method: :delete }, 
-                    class: "favorite_btn" do %>
-          確認しましたを消す
-         <% end %>
-         
-         <span class="favorite-count"><%= @road_condition.favorites.count %></span>人が確認しました
+          <%= link_to road_condition_favorites_path(@road_condition), 
+                     data: { turbo_method: :delete }, 
+                     class: "favorite_btn" do %>
+            確認しましたを取り消す
+          <% end %>
+          <span class="favorite-count"><%= @road_condition.favorites.count %></span>人が確認しました
         <% else %>
-         <%= link_to road_condition_favorites_path(@road_condition), 
-                    data: { turbo_method: :post }, 
-                    class: "favorite_btn" do %>
-          確認しました
-         <% end %>
-         <span class="favorite-count"><%= @road_condition.favorites.count %></span>人が確認しました
+          <%= link_to road_condition_favorites_path(@road_condition), 
+                     data: { turbo_method: :post }, 
+                     class: "favorite_btn" do %>
+            確認しました
+          <% end %>
+          <span class="favorite-count"><%= @road_condition.favorites.count %></span>人が確認しました
         <% end %><br>
-      
 
-        <%= link_to '編集する', edit_road_condition_path(@road_condition.id), class: "btn btn-info mr-3" %>
-        <%= link_to '削除する', road_condition_path(@road_condition.id), 
-                     data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, 
-                     class: "btn btn-danger" %><br>
+        <!-- 編集と削除リンク -->
+        <div class="button-group mt-3">
+          <%= link_to '編集する', edit_road_condition_path(@road_condition.id), class: "btn btn-info mr-3" %>
+          <%= link_to '削除する', road_condition_path(@road_condition.id), 
+                      data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, 
+                      class: "btn btn-danger" %>
+        </div><br>
+
         <%= link_to '投稿一覧ページへ', road_conditions_path, class: "btn btn-dark mt-3" %>
       </div>
     </div>
@@ -49,6 +52,7 @@
     <div class="row mt-5">
       <div class="col-md-12">
         <div class="comments-section">
+          <!-- コメント投稿フォーム -->
           <%= form_with(model: [@road_condition, @comment], local: true) do |f| %>
             <%= f.text_area :comment, size: "60x3", placeholder: "コメントする", class: "form-control mb-2" %>
             <%= f.submit "送信する", class: "btn btn-success mb-4" %>
@@ -56,26 +60,46 @@
 
           <p>コメント件数：<%= @comments.count %></p>
 
-          <!-- コメントを降順に並べ替え -->
+          <!-- コメント一覧を降順に並べ替え -->
           <% @comments.order(created_at: :desc).each_with_index do |comment, index| %>
             <div class="comments-index mb-2">
-              <p><strong>No.<%= @comments.count - index %></strong></p> <!-- 古い順に番号を表示 -->
+              <p><strong>No.<%= @comments.count - index %></strong></p> <!-- コメント番号 -->
               <p><strong><%= comment.user.name %></strong></p>
               <p class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
               <div class="d-flex">
                 <p class="flex-grow-1"><%= comment.comment %></p>
-                <% if comment.user == current_user %>
-                  <div class="comment-delete">
-                    <%= link_to "削除", 
+
+                <!-- コメントのお気に入り（確認）ボタン -->
+                <div class="favorite-btn-container">
+                  <% if comment.favorited_by?(current_user) %>
+                    <%= link_to road_condition_comment_comment_favorites_path(comment.road_condition_id, comment.id), 
+                                data: { turbo_method: :delete }, 
+                                class: "favorite_btn" do %>
+                      確認しましたを取り消す
+                    <% end %>
+                  <% else %>
+                    <%= link_to road_condition_comment_comment_favorites_path(comment.road_condition_id, comment.id), 
+                                data: { turbo_method: :post }, 
+                                class: "favorite_btn" do %>
+                      確認しました
+                    <% end %>
+                  <% end %>
+
+                  <!-- コメント削除ボタン（自分のコメントのみ表示） -->
+                  <% if comment.user == current_user %>
+                    <div class="comment-delete ml-3">
+                      <%= link_to "削除", 
                                  road_condition_comment_path(comment.road_condition, comment),  
                                  data: { turbo_method: :delete }, 
                                  class: "btn btn-sm btn-danger" %>
-                  </div>
-                <% end %>
+                    </div>
+                  <% end %>
+                </div>
               </div>
             </div>
           <% end %>
 
+          <!-- ページネーション -->
           <%= paginate @comments %>
         </div>
       </div>
