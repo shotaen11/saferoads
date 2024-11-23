@@ -5,6 +5,11 @@ class RoadCondition < ApplicationRecord
     has_many :comments, dependent: :destroy
     has_many :favorites, dependent: :destroy
 
+    validates :road_name, presence: true
+    validates :road_status, presence: true
+    validates :description, presence: true, length: { maximum: 195 }
+    validates :image, presence: true  
+
 #   ユーザーidがFavoritesテーブルに存在するか
     def favorited_by?(user)
       favorites.where(user_id: user.id).exists?

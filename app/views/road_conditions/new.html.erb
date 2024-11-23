@@ -5,6 +5,15 @@
       <h1 class="font-weight-normal mt-2 mb-2">新規報告</h1>
     </div>
 
+    <% if @road_condition.errors.any? %>
+    <div class="card text-center text-white bg-danger mt-3">
+      <%= @road_condition.errors.count %>件のエラーが発生しました
+      <% @road_condition.errors.full_messages.each do |message| %>
+        <%= message %>
+      <% end %>
+      </div>
+    <% end %>
+
     <!-- フォーム部分 -->
     <div class="row mt-5">
       <div class="col-md-8 mx-auto">
