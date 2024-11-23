@@ -5,6 +5,7 @@ class RoadConditionsController < ApplicationController
 
   def create
     @road_condition = RoadCondition.new(road_conditions_params)
+    @road_condition.user_id = current_user.id
     if @road_condition.save
       redirect_to road_condition_path(@road_condition)
     else
@@ -40,6 +41,6 @@ class RoadConditionsController < ApplicationController
 
   private
   def road_conditions_params
-    params.require(:road_condition).permit(:road_name, :road_status, :description, :image)
+    params.require(:road_condition).permit(:user_id, :road_name, :road_status, :description, :image)
   end
 end
