@@ -5,6 +5,13 @@
       <h1 class="font-weight-normal mt-2 mb-2">報告案件一覧</h1>
     </div>
 
+    <div class="row mt-3 mb-3 align-self-end">
+      <%= form_with method: :get, road_name: true do |f| %>
+      <%= f.text_field :search %>
+      <%= f.submit '検索する', name: nil %>
+      <% end %>
+    </div>
+
     <!-- 報告案件の一覧部分 -->
     <div class="row mt-5 index-left w-100 justify-content-center">
       <% @road_conditions.each do |road_condition| %>

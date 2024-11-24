@@ -20,6 +20,7 @@ class RoadConditionsController < ApplicationController
   def index
     # ページネーションを設定して最新順に並べる
     @road_conditions = RoadCondition.page(params[:page]).reverse_order
+    @road_conditions = @road_conditions.where('road_name LIKE ?', "%#{params[:search]}%") if params[:search].present?
   end
 
   # 特定の道路状況の詳細を表示
