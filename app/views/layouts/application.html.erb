@@ -17,6 +17,7 @@
       <div><%= link_to "トップ", root_path, class: "text-white nav-link" %></div>
       <div><%= link_to "報告する", new_road_condition_path, class: "text-white nav-link" %></div>
       <div><%= link_to "報告一覧", road_conditions_path, class: "text-white nav-link" %></div>
+        <div><%= link_to "下書き一覧", confirm_road_conditions_path, class: "text-white nav-link" %></div>
       <div><%= link_to "ユーザ一覧", users_path, class: "text-white nav-link" %></div>
       <div><%= link_to "マイページ", user_path(current_user.id), class: "text-white nav-link" %></div>
       <div><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-white nav-link" %></div>

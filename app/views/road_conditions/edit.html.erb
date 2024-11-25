@@ -5,6 +5,7 @@
       <h1 class="font-weight-normal mt-2 mb-5">報告編集</h1>
     </div>
 
+    <!-- エラー表示 -->
     <% if @road_condition.errors.any? %>
     <div class="card text-center text-white bg-danger mt-3">
       <%= @road_condition.errors.count %>件のエラーが発生しました
@@ -39,13 +40,13 @@
           <!-- 開始時刻 -->
           <div class="form-group mb-3">
             <label class="form-label">【開始時刻】</label><br>   
-            <%= f.datetime_select :start_time, class: "form-control" %>
+            <%= f.datetime_select :start_time, order: [:year, :month, :day, :hour, :minute], minute_step: 5 %>
           </div>
 
           <!-- 終了時刻 -->
           <div class="form-group mb-3">
             <label class="form-label">【終了時刻】</label><br>
-            <%= f.datetime_select :end_time, class: "form-control" %>
+            <%= f.datetime_select :end_time, order: [:year, :month, :day, :hour, :minute], minute_step: 5 %>
             <label class="form-check-label">
               <%= f.check_box :end_time_undefined, {}, true, false %> 未定
             </label>
@@ -61,6 +62,11 @@
           <div class="form-group mb-3">
             <label class="form-label">【画像】</label><br>
             <%= f.file_field :image, class: "form-control-file" %>
+          </div>
+
+          <!-- 下書き機能 -->
+          <div class="form-group">
+            <%= f.select :status, RoadCondition.statuses.keys.map { |k| [t("enums.road_condition.status.#{k}"),k]}, {}, {class: "custom-select w-25 mb-3"} %>
           </div>
 
           <!-- 保存ボタン -->

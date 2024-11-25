@@ -10,7 +10,10 @@ class RoadCondition < ApplicationRecord
     validates :description, presence: true, length: { maximum: 195 }
     validates :image, presence: true  
 
-#   ユーザーidがFavoritesテーブルに存在するか
+    # enum カラム名：{名前:番号}
+    enum status: { published: 0, draft: 1 }
+
+    #   ユーザーidがFavoritesテーブルに存在するか
     def favorited_by?(user)
       favorites.where(user_id: user.id).exists?
     end

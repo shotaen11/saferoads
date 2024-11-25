@@ -7,21 +7,21 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
   end  
   
-  resources :road_conditions
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :road_conditions do
+    resources :comments, only: [:create, :destroy] do
+      resource :comment_favorites, only: [:create, :destroy]
+    end
+    resource :favorites, only: [:create, :destroy]
+    
+    collection do
+      get 'confirm'  # confirm用のアクション
+    end
+  end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "posts#index"
   root :to => 'homes#top'
-
-  resources :road_conditions do
-    resources :comments, only:[:create, :destroy] do
-     resource :comment_favorites, only: [:create, :destroy]
-  end
-    resource :favorites, only:[:create, :destroy]        
-  end
 end
