@@ -19,11 +19,9 @@
   min-height: 100vh; /* 全画面をカバー */
   display: flex;
   justify-content: center;
-  align-items: center;
-  background-color: rgb(223, 238, 244);
-  background-blend-mode: lighten;
+  background-image: url(/assets/new.jpg);
   background-size: cover; /* 背景画像が正しく拡大縮小される */
-  padding: 20px; /* 内側の余白 */
+  padding: 5px; /* 内側の余白 */
   border-radius: 10px; /* 丸みを追加 */
 }
 
@@ -47,6 +45,7 @@
 /* indexページ */
 .cover-index {
   min-height: 100vh; /* ページ全体をカバー */
+  background-image: url(/assets/index.jpg);
   background-color: #f8f9fa; /* 明るい背景色 */
   padding: 2rem 0;
 }
