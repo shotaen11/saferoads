@@ -19,7 +19,7 @@
   min-height: 100vh; /* 全画面をカバー */
   display: flex;
   justify-content: center;
-  background-image: url(/assets/new.jpg);
+  background-color: #ffffff; /* 背景色を白に設定 */
   background-size: cover; /* 背景画像が正しく拡大縮小される */
   padding: 5px; /* 内側の余白 */
   border-radius: 10px; /* 丸みを追加 */
@@ -45,8 +45,7 @@
 /* indexページ */
 .cover-index {
   min-height: 100vh; /* ページ全体をカバー */
-  background-image: url(/assets/index.jpg);
-  background-color: #f8f9fa; /* 明るい背景色 */
+  background-color: #ffffff; /* 背景色を白に設定 */
   padding: 2rem 0;
 }
 
@@ -77,7 +76,7 @@
 }
 
 .road-status {
-  display: inline-block;
+  display: flex;
   padding: 0.5rem 1rem;
   border-radius: 20px;
   font-size: 0.9rem;
@@ -114,10 +113,13 @@
 }
 
 .caption {
+  display: inline-flex; /* inline-flex に変更 */
+  align-items: center;  /* 水平中央に揃える */
+  font-weight: bold; /* 見出しを目立たせる */
   color: #2c3e50; /* キャプションにダークグレー色 */
-  font-size: 18px;
-  font-weight: bold; /* 強調 */
-  margin-bottom: 20px; /* 余白を追加 */
+  font-size:  20px; /* フォントサイズ調整 */
+  margin-bottom: 10px; /* 余白を調整 */
+  margin-right: 10px; /* 値との間隔を調整 */
 }
 
 #text {
@@ -125,12 +127,6 @@
   line-height: 1.6;
   color: #34495e; /* 詳細内容の色をダークグレー */
   margin-bottom: 20px;
-}
-
-.road-name, .road-status {
-  font-size: 18px;
-  font-weight: normal;
-  color: #34495e; /* 路線名と状況の色をダークグレー */
 }
 
 .img-fluid {
@@ -144,10 +140,7 @@
 .btn {
   margin-top: 10px; /* ボタン間に適切な間隔 */
   margin-bottom: 10px; /* ボタン下部に余白 */
-}
-
-.btn-info {
-  margin-right: 10px; /* 編集ボタンと削除ボタンに間隔 */
+  margin-right: 20px; /* 編集ボタンと削除ボタンに間隔 */
 }
 
 /* レスポンシブ対応 */
