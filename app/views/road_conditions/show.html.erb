@@ -1,13 +1,16 @@
 <div class="cover-1">
   <div class="container d-flex flex-column align-items-center">
+
     <!-- タイトル部分 -->
-    <div class="row mt-2">
-      <h1 class="font-weight-normal mt-2 mb-5">報告詳細</h1>
+    <div class="row mt-4">
+      <div class="col text-center">
+        <h1 class="font-weight-normal">報告詳細</h1>
+      </div>
     </div>
 
     <!-- エラーメッセージ -->
     <% if @comment&.errors&.any? %>
-      <div class="alert alert-danger mt-3">
+      <div class="alert alert-danger mt-3 w-100">
         <p><%= pluralize(@comment.errors.count, "件のエラー") %>が発生しました:</p>
         <ul>
           <% @comment.errors.full_messages.each do |message| %>
@@ -18,7 +21,8 @@
     <% end %>
 
     <!-- 報告詳細部分 -->
-    <div class="row">
+    <div class="row mt-4 w-100">
+      <div class="col-md-12">
       <!-- 報告者 -->
       <div class="col-md-12 mb-3 d-flex">
         <p class="caption mb-0">報告者　：</p>
@@ -31,6 +35,24 @@
         <p class="caption ml-2 mb-0"><%= @road_condition.road_name %></p>
       </div>
 
+      <!-- 開始時刻 -->
+      <div class="col-md-12 mb-3 d-flex">
+        <p class="caption mb-0">開始時刻：</p>
+        <p class="caption ml-2 mb-0"><%= @road_condition.start_time.present? ? @road_condition.start_time.strftime('%Y-%m-%d %H:%M') : '未設定' %></p>
+      </div>
+
+      <!-- 終了時刻未定 --> 
+      <div class="col-md-12 mb-3 d-flex">
+        <p class="caption mb-0">終了時刻：</p>
+        <p class="caption ml-2 mb-0">
+          <% if @road_condition.end_time_undefined? %>
+          終了時刻未定
+          <% else %>
+            <%= @road_condition.end_time.present? ? @road_condition.end_time.strftime('%Y-%m-%d %H:%M') : '未設定' %>
+          <% end %>
+        </p>
+      </div>
+    
       <!-- 状況 -->
       <div class="col-md-12 mb-3 d-flex">
         <p class="caption mb-0">状況　　：</p>
@@ -38,38 +60,43 @@
       </div>
 
       <!-- 詳細内容 -->
-      <div class="col-md-12 mb-3 d-flex">
+      <div class="col-md-12 mb-1 d-flex">
         <p class="caption mb-0">詳細内容：</p>
-        <p class="caption ml-2 mb-0"><%= @road_condition.description %></p>
+        <p><%= simple_format(@road_condition.description) %></p>
       </div>
 
-      <!-- 添付画像 -->
-      <div class="col-md-12 text-center">
-        <%= attachment_image_tag @road_condition, :image, format: 'jpeg', size: "600x600", class: "img-fluid rounded" %>
+        <!-- 添付画像 -->
+        <div class="text-center mb-4">
+          <%= attachment_image_tag @road_condition, :image, format: 'jpeg', size: "600x600", class: "img-fluid" %>
+        </div>
       </div>
+    </div>
 
-      <!-- 確認ボタン -->
-      <div class="col-md-12 text-center my-3">
+    <!-- 確認ボタン -->
+    <div class="row mt-3 w-100">
+      <div class="col text-left">
         <% if @road_condition.favorited_by?(current_user) %>
           <%= link_to road_condition_favorites_path(@road_condition), 
                       data: { turbo_method: :delete }, 
-                      class: "btn btn-outline-danger mb-2" do %>
+                      class: "btn btn-outline-danger" do %>
             確認しましたを取り消す
           <% end %>
         <% else %>
           <%= link_to road_condition_favorites_path(@road_condition), 
                       data: { turbo_method: :post }, 
-                      class: "btn btn-outline-success mb-2" do %>
+                      class: "btn btn-outline-success" do %>
             確認しました
           <% end %>
         <% end %>
-        <p class="favorite-count"><%= @road_condition.favorites.count %>人が確認しました</p>
+        <p class="favorite-count mt-2"><%= @road_condition.favorites.count %>人が確認しました</p>
       </div>
+    </div>
 
-      <!-- 編集と削除リンク -->
-      <div class="col-md-12 text-center">
+    <!-- 編集と削除リンク -->
+    <div class="row mt-3 w-100">
+      <div class="col text-right">
         <% if @road_condition.user == current_user %>
-          <%= link_to '編集する', edit_road_condition_path(@road_condition.id), class: "btn btn-info" %>
+          <%= link_to '編集する', edit_road_condition_path(@road_condition.id), class: "btn btn-info mr-2" %>
           <%= link_to '削除する', road_condition_path(@road_condition.id), 
                       data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, 
                       class: "btn btn-danger" %>
@@ -79,28 +106,36 @@
     </div>
 
     <!-- コメント欄部分 -->
-    <div class="row mt-5">
-      <div class="col-md-12">
-        <div class="comments-section">
-          <!-- コメント投稿フォーム -->
-          <%= form_with(model: [@road_condition, @comment], local: true) do |f| %>
-            <%= f.text_area :comment, size: "60x3", placeholder: "コメントする", class: "form-control mb-2" %>
-            <%= f.submit "送信する", class: "btn btn-success mb-4" %>
-          <% end %>
+    <div class="row mt-5 w-100">
+      <div class="col">
+        <!-- コメント投稿フォーム -->
+        <%= form_with(model: [@road_condition, @comment], local: true) do |f| %>
+          <div class="form-group">
+            <%= f.text_area :comment, size: "80x3", placeholder: "コメントする", class: "form-control mb-2" %>
+          </div>
+          <%= f.submit "送信する", class: "btn btn-success mb-4" %>
+        <% end %>
 
-          <!-- コメント件数 -->
-          <p>コメント件数：<%= @comments.count %></p>
+        <!-- コメント件数 -->
+        <p class="mb-3">コメント件数：<%= @comments.count %></p>
 
-          <!-- コメント一覧 -->
-          <% @comments.order(created_at: :desc).each_with_index do |comment, index| %>
-            <div class="comments-index mb-3 p-3 border rounded">
-              <p><strong>No.<%= @comments.count - index %></strong></p>
-              <p><strong><%= comment.user.name %></strong></p>
-              <p class="text-muted"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-              <p class="mb-2"><%= comment.comment %></p>
-
-              <div class="d-flex justify-content-between align-items-center">
-                <!-- 確認ボタン -->
+        <!-- コメント一覧 -->
+        <% @comments.order(created_at: :desc).each_with_index do |comment, index| %>
+          <div class="comments-index mb-3 p-3 border rounded">
+            <!-- ヘッダー部分 -->
+            <div class="d-flex align-items-center">
+              <p class="caption ml-3"><strong>No.<%= @comments.count - index %></strong></p>
+              <p class="caption ml-3"><strong><%= comment.user.name %></strong></p>
+              <p class="text-muted mt-3"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+            </div>
+        
+            <!-- コメント内容 -->
+            <p class="comments mb-2"><%= comment.comment %></p>
+        
+            <!-- ボタン部分 -->
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- 確認しましたボタン -->
+              <div>
                 <% if comment.favorited_by?(current_user) %>
                   <%= link_to road_condition_comment_comment_favorites_path(comment.road_condition_id, comment.id), 
                               data: { turbo_method: :delete }, 
@@ -114,23 +149,25 @@
                     確認しました
                   <% end %>
                 <% end %>
-                <p class="favorite-count"><%= comment.comment_favorites.count %>人が確認しました</p>
-
-                <!-- 削除ボタン -->
-                <% if comment.user == current_user %>
-                  <%= link_to "削除", 
-                             road_condition_comment_path(comment.road_condition, comment),  
-                             data: { turbo_method: :delete }, 
-                             class: "btn btn-sm btn-danger ml-3" %>
-                <% end %>
+                <span class="ml-2 text-muted"><%= comment.comment_favorites.count %>人が確認しました</span>
               </div>
+        
+              <!-- 削除ボタン -->
+              <% if comment.user == current_user %>
+                <%= link_to "削除", 
+                           road_condition_comment_path(comment.road_condition, comment),  
+                           data: { turbo_method: :delete }, 
+                           class: "btn btn-sm btn-danger ml-3" %>
+              <% end %>
             </div>
-          <% end %>
+          </div>
+        <% end %>
+        
 
-          <!-- ページネーション -->
-          <%= paginate @comments %>
-        </div>
+        <!-- ページネーション -->
+        <%= paginate @comments %>
       </div>
     </div>
+
   </div>
 </div>

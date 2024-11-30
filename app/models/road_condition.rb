@@ -17,4 +17,9 @@ class RoadCondition < ApplicationRecord
     def favorited_by?(user)
       favorites.where(user_id: user.id).exists?
     end
+
+      # 終了時刻が未定かどうかを判断
+    def end_time_undefined?
+      self.end_time_undefined == true
+    end
 end

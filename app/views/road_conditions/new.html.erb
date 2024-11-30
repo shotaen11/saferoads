@@ -37,16 +37,18 @@
           <!-- 開始時刻 -->
           <div class="form-group mb-3">
             <label class="form-label">【開始時刻】</label><br>   
-            <%= f.datetime_select :start_time, order: [:year, :month, :day, :hour, :minute], minute_step: 5 %>
+            <%= f.datetime_local_field :start_time, class: "form-control" %>
           </div>
 
           <!-- 終了時刻 -->
           <div class="form-group mb-3">
-            <label class="form-label">【終了時刻】</label><br>
-            <%= f.datetime_select :end_time, order: [:year, :month, :day, :hour, :minute], minute_step: 5 %>
-            <label class="form-check-label">
-              <%= f.check_box :end_time_undefined, {}, true, false %> 未定
-            </label>
+            <label class="form-label">【終了時刻】</label><br> 
+            <%= f.datetime_local_field :end_time, class: "form-control" %>
+          </div>
+          <!-- 終了時刻未定のチェックボックス -->
+          <div class="form-check">
+            <%= f.check_box :end_time_undefined, class: "form-check-input" %>
+            <%= f.label :end_time_undefined, "終了時刻未定" %>
           </div>
 
           <!-- 詳細情報 -->
