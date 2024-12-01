@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_30_083531) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_01_121756) do
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comment_favorites", force: :cascade do |t|
     t.integer "user_id"
     t.integer "comment_id"
@@ -54,6 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_30_083531) do
     t.integer "user_id"
     t.integer "status", default: 0, null: false
     t.boolean "end_time_undefined"
+    t.integer "category_id"
   end
 
   create_table "users", force: :cascade do |t|

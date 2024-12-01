@@ -1,14 +1,15 @@
 <div class="cover-user-show">
-  <div class="container d-flex flex-column align-items-center">
+  <div class="container align-items-center">
     <!-- タイトル -->
-    <div class="row mt-5">
+    <div class="row mt-3 mb-5">
       <% if user_signed_in? && @user == current_user %>
         <h2 class="title font-weight-normal">マイページ</h2>
       <% else %>
         <h2 class="title font-weight-normal"><%= @user.name %>さんのページ</h2>
       <% end %>
     </div>
-
+  </div> 
+  <div class="container d-flex flex-column align-items-center">
     <!-- プロフィール編集ボタン -->
     <% if user_signed_in? && @user == current_user %>
       <p class="d-flex align-self-end">

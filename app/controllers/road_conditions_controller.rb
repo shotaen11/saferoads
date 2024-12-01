@@ -80,6 +80,6 @@ class RoadConditionsController < ApplicationController
 
   # Strong Parameters: 道路状況に許可するパラメータを制限
   def road_conditions_params
-    params.require(:road_condition).permit(:user_id, :road_name, :road_status, :description, :image, :status, :start_time, :end_time, :end_time_undefined)
+    params.require(:road_condition).permit(:user_id, :road_name, :road_status, :description, :image, :status, :start_time, :end_time, :end_time_undefined, :category_id)
   end
  end

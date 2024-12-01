@@ -1,9 +1,9 @@
 
-<div class="row mt-3 mb-3 align-self-end">
-<%= form_with method: :get, road_name: true do |f| %>
-<%= f.text_field :search %>
-<%= f.submit '検索する', name: nil %>
-<% end %>
+<div class="row mt-3 mb-3 justify-content-end">
+  <%= form_with method: :get, road_name: true do |f| %>
+    <%= f.text_field :search %>
+    <%= f.submit '検索する', name: nil %>
+  <% end %>
 </div>
 
 <!-- 報告案件の一覧部分 -->

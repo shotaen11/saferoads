@@ -1,11 +1,8 @@
 <div class="cover-1">
-  <div class="container d-flex flex-column align-items-center">
-
+  <div class="container align-items-center">
     <!-- タイトル部分 -->
-    <div class="row mt-4">
-      <div class="col text-center">
-        <h2 class="title font-weight-normal">報告詳細</h2>
-      </div>
+    <div class="row">
+      <h2 class="title font-weight-normal mt-3 mb-5">報告詳細</h2>
     </div>
 
     <!-- エラーメッセージ -->
@@ -72,6 +69,11 @@
           <% else %>
             <%= image_tag 'no_photo.png', size: "600x600", class: "img-fluid" %>
           <% end %>
+        </div>
+
+        <!-- カテゴリー -->
+        <div class="col-md-12 mb-1 d-flex">
+          <p class="text-muted mt-3">カテゴリー:　<%= @road_condition.category ? @road_condition.category.name : '未設定' %></p>
         </div>
       </div>
     </div>

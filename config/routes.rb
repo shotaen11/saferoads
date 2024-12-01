@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :categories
   devise_for :users
   resources :users, only: [:index, :show, :edit, :update] do
     member do

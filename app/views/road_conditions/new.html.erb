@@ -1,8 +1,8 @@
 <div class="cover-1">
-  <div class="container d-flex flex-column align-items-center">
+  <div class="container align-items-center">
     <!-- タイトル部分 -->
-    <div class="row mt-5">
-      <h2 class="title font-weight-normal mt-2 mb-2">新規報告</h2>
+    <div class="row">
+      <h2 class="title font-weight-normal mt-3 mb-5">新規報告</h2>
     </div>
 
     <!-- エラー表示 -->
@@ -16,7 +16,7 @@
     <% end %>
 
     <!-- フォーム部分 -->
-    <div class="row mt-5">
+    <div class="row mt-3">
       <div class="col-md-8 mx-auto">
         <%= form_with model: @road_condition, local: true do |f| %>
           <!-- 路線名 -->
@@ -61,6 +61,12 @@
           <div class="form-group mb-3">
             <label class="form-label">【画像】</label><br>
             <%= f.file_field :image, class: "form-control-file" %>
+          </div>
+
+          <!-- カテゴリー -->
+          <div class="form-group mb-3">
+            <label class="form-label">【カテゴリー】</label><br>
+            <%= f.select :category_id, Category.all.map { |o| [o.name, o.id] }, { include_blank: "選択してください" }, class: "form-control" %>
           </div>
 
           <!-- 下書き機能 -->
