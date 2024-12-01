@@ -1,7 +1,7 @@
 /* newページ */
 .h1 {
   font-family: 'Georgia', serif; /* フォントを指定 */
-  font-size: 36px;
+  font-size: 25px;
   color: #000000; /* フォントカラー */
   font-weight: bold;
   text-align: center; /* 中央揃え */
@@ -16,7 +16,7 @@
   padding: 0.25em 0;
 }
 
-h1:after {
+.title:after {
   content: "";
   display: block;
   height: 4px;

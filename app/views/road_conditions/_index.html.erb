@@ -22,7 +22,8 @@
         <span class="road-status badge 
           <%= 'bg-danger' if road_condition.road_status == '通行止' %>
           <%= 'bg-info' if road_condition.road_status == '片側交互通行' %>
-          <%= 'bg-warning' if road_condition.road_status == 'その他' %>">
+          <%= 'bg-warning' if road_condition.road_status == 'その他' %>
+          <%= 'bg-success' if road_condition.road_status == '解除' %>">
           <%= road_condition.road_status %>
         </span>
       </div>
