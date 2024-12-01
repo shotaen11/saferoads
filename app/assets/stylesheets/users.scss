@@ -25,3 +25,44 @@
 .profile {
     padding: 15px;
 }
+
+.one-post-mypage {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* アニメーション */
+    border: 1px solid #ddd; /* ボーダーで区切り */
+    border-radius: 12px; /* 丸みをつける */
+    overflow: hidden; /* 画像がはみ出さないように */
+    background-color: #fff; /* カード背景 */
+}
+
+.card-1:hover {
+  opacity: 0.6;
+}
+
+.content-img {
+  padding: 0.2em 0;
+  text-align: center;
+  background: #f9fafb;
+}
+
+.content-1,
+.content-2 {
+  position: relative;
+  padding: 0.6em 0.3em;
+  margin: auto;
+  font-size: 1em;
+}
+
+.content-2 {
+  font-size: 0.8em;
+}
+
+.content-1 a, 
+.content-2 a {
+  text-decoration: none; /* 下線を消す */
+}
+
+.content-1 a:hover, 
+.content-2 a:hover {
+  color: #0056b3; /* ホバー時のリンク色 */
+  text-decoration: underline; /* ホバー時に下線を付ける */
+}

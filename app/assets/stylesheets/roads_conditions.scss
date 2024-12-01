@@ -12,6 +12,16 @@
   width: fit-content; /* 内容に合わせて幅を調整 */
   background-color: #ffffff; /* 背景色を白に設定 */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  position: relative;
+  padding: 0.25em 0;
+}
+
+h1:after {
+  content: "";
+  display: block;
+  height: 4px;
+  background: -webkit-linear-gradient(to right, rgb(56, 58, 63), transparent);
+  background: linear-gradient(to right, rgb(56, 58, 63), transparent);
 }
 
 /* cover-1は、index以外に適用 */
@@ -26,7 +36,7 @@
 }
 
 .form-label {
-  font-size: 18px; /* フォントサイズ */
+  font-size: 20px; /* フォントサイズ */
   color: #555; /* ラベルの色 */
 }
 
