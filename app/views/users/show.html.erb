@@ -1,60 +1,73 @@
 <div class="cover-user-show">
   <div class="container d-flex flex-column align-items-center">
+    <!-- タイトル -->
     <div class="row mt-5">
       <% if user_signed_in? && @user == current_user %>
-       <h2 class="title font-weight-normal">マイページ</h2>
+        <h2 class="title font-weight-normal">マイページ</h2>
       <% else %>
-       <h2 class="title font-weight-normal"><%= @user.name %>さんのページ</h2>
+        <h2 class="title font-weight-normal"><%= @user.name %>さんのページ</h2>
       <% end %>
     </div>
+
+    <!-- プロフィール編集ボタン -->
     <% if user_signed_in? && @user == current_user %>
-    <p class="d-flex align-self-end">
-      <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-success" %>
-    </p>
+      <p class="d-flex align-self-end">
+        <%= link_to "プロフィール編集", edit_user_path(@user), class: "btn btn-success" %>
+      </p>
     <% end %>
+
+    <!-- フォローボタン -->
     <% if current_user != @user %>
-      <% if current_user.following?(@user) %>
-        <p class="d-flex align-self-end">
-          <%= link_to 'フォロー外す', user_relationships_path(@user.id),  data: { turbo_method: :delete }, class: "btn btn-danger" %>
-        </p>
+      <p class="d-flex align-self-end">
+        <% if current_user.following?(@user) %>
+          <%= link_to 'フォロー外す', user_relationships_path(@user.id), data: { turbo_method: :delete }, class: "btn btn-danger" %>
         <% else %>
-        <p class="d-flex align-self-end">
-          <%= link_to 'フォローする', user_relationships_path(@user.id),  data: { turbo_method: :post }, class:"btn btn-success" %>
-        </p>
-      <% end %>
+          <%= link_to 'フォローする', user_relationships_path(@user.id), data: { turbo_method: :post }, class: "btn btn-success" %>
+        <% end %>
+      </p>
     <% end %>
+
+    <!-- プロフィール画像と自己紹介 -->
     <div class="d-flex w-100">
       <%= attachment_image_tag @user, :profile_image, size: '100x100', fallback: "no_image.svg", class: "mb-3 profile-img" %>
       <h4 class="ml-3 mb-3 card w-100 profile"><%= @user.profile %></h4>
     </div>
+
+    <!-- フォロー・フォロワー -->
     <div class="d-flex">
-     <%= link_to follows_user_path(@user) do %>
-      <h6>フォロー<%= @following_users.count %></h6>
-     <% end %>  
-     <%= link_to followers_user_path(@user) do %>
-      <h6>フォロワー<%= @follower_users.count %></h6>
-     <% end %>
-    </div>
-    <div class="row mt-5 w-100 justify-content-center">
-      <% @road_conditions.each do |road_condition| %>
-      <div class="col-md-3 col-lg-3 mb-3"> <!-- 中サイズ以上で3列に分ける -->
-        <div class="one-post-mypage">
-          <div class="content-img">
-            <% if road_condition&.image.present? %>
-              <%= image_tag attachment_url(road_condition, :image), size: "200x133", class: "img-fluid" %>
-            <% else %>
-              <%= image_tag 'no_photo.png', size: "200x133", class: "img-fluid" %>
-            <% end %>
-          </div>      
-          <%= link_to road_condition_path(road_condition) do %>          
-            <p class="content-1"><%= road_condition.road_name %></p>
-            <p class="content-1"><%= road_condition.road_status %></p>
-            <p class="content-2"><%= "#{road_condition.comments.count} コメント" %></p>
-          <% end %>
-        </div>
-      </div>
+      <%= link_to follows_user_path(@user) do %>
+        <h6>フォロー <%= @following_users.count %></h6>
+      <% end %>
+      <%= link_to followers_user_path(@user) do %>
+        <h6>フォロワー <%= @follower_users.count %></h6>
       <% end %>
     </div>
+
+    <!-- 投稿カード -->
+    <div class="row mt-5 w-100 justify-content-center">
+      <% @road_conditions.each do |road_condition| %>
+        <div class="col-md-3 col-lg-3 mb-3">
+          <div class="one-post-mypage card">
+            <div class="content-img">
+              <% if road_condition&.image.present? %>
+                <%= image_tag attachment_url(road_condition, :image), class: "img-fluid card-img-top" %>
+              <% else %>
+                <%= image_tag 'no_photo.png', class: "img-fluid card-img-top" %>
+              <% end %>
+            </div>
+            <div class="card-body">
+              <%= link_to road_condition_path(road_condition) do %>
+                <p class="card-title"><%= road_condition.road_name %></p>
+              <% end %>
+                <p class="card-text"><%= road_condition.road_status %></p>
+                <p class="text-muted"><%= "#{road_condition.comments.count} コメント" %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- ページネーション -->
     <%= paginate @road_conditions %>
   </div>
 </div>

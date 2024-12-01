@@ -1,68 +1,66 @@
+/* メインコンテナ */
 .cover-user-show {
-    height: 100%;
-    width: 100%;
-    background-color: #ffffff; /* 背景色を白に設定 */
-    background-blend-mode: lighten;
-    background-size: 100% 100%;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 20px;
 }
 
-.cover-user-index {
-    height: 100%;
-    width: 100%;
-    background-color: #ffffff; /* 背景色を白に設定 */
-    background-blend-mode: lighten;
-    background-size: 100% 100%;
-}
-
-.cover-user-edit {
-    height: 100%;
-    width: 100%;
-    background-color: #ffffff; /* 背景色を白に設定 */
-    background-blend-mode: lighten;
-    background-size: 100% 100%;
-}
-
-.profile {
-    padding: 15px;
-}
-
+/* カード全体 */
 .one-post-mypage {
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* アニメーション */
-    border: 1px solid #ddd; /* ボーダーで区切り */
-    border-radius: 12px; /* 丸みをつける */
-    overflow: hidden; /* 画像がはみ出さないように */
-    background-color: #fff; /* カード背景 */
+  min-height: 350px; /* カード全体の最低高さを設定 */
+  display: flex;
+  flex-direction: column; /* カード内の要素を縦に並べる */
+  justify-content: space-between; /* 要素を均等に配置 */
+  border: 1px solid #ddd; /* 枠線を追加 */
+  border-radius: 8px; /* カードの角を丸くする */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 影を追加 */
+  overflow: hidden; /* カード内で要素がはみ出さないようにする */
 }
 
-.card-1:hover {
-  opacity: 0.6;
-}
-
+/* 画像部分 */
 .content-img {
-  padding: 0.2em 0;
+  position: relative; /* 位置を調整するためにrelativeにする */
+  width: 100%; /* 親要素の幅に合わせる */
+  height: 200px; /* 固定の高さを設定 */
+  overflow: hidden; /* 枠をはみ出した部分を隠す */
+}
+
+.card-img-top {
+  position: absolute; /* 親要素に絶対配置 */
+  top: 50%; /* 縦方向に中央配置 */
+  left: 50%; /* 横方向に中央配置 */
+  transform: translate(-50%, -50%); /* 完全に中央に配置 */
+  width: 100%; /* 画像の横幅をカードの横幅に合わせる */
+  height: auto; /* 高さは縦横比を維持 */
+  object-fit: contain; /* 縦横比を保ちながら画像を縮小 */
+}
+
+/* テキスト部分 */
+.card-body {
+  flex-grow: 1; /* テキスト部分を均等に伸縮させる */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* 中央寄せ */
   text-align: center;
-  background: #f9fafb;
 }
 
-.content-1,
-.content-2 {
-  position: relative;
-  padding: 0.6em 0.3em;
-  margin: auto;
-  font-size: 1em;
+.card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-.content-2 {
-  font-size: 0.8em;
+.card-text {
+  font-size: 1rem;
+  color: #666;
 }
 
-.content-1 a, 
-.content-2 a {
-  text-decoration: none; /* 下線を消す */
+.text-muted {
+  font-size: 0.9rem;
 }
 
-.content-1 a:hover, 
-.content-2 a:hover {
-  color: #0056b3; /* ホバー時のリンク色 */
-  text-decoration: underline; /* ホバー時に下線を付ける */
+/* プロフィール */
+.profile {
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
 }
