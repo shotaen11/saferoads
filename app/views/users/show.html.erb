@@ -40,13 +40,17 @@
       <div class="col-md-3 col-lg-3 mb-3"> <!-- 中サイズ以上で3列に分ける -->
         <div class="one-post-mypage">
           <div class="content-img">
-            <%= link_to road_condition_path(road_condition) do %>
-            <%= attachment_image_tag road_condition, :image, format: 'jpeg', size: '200x133' %>
-          </div>
-          <p class="content-1"><%= road_condition.road_name %></p>
-          <p class="content-1"><%= road_condition.road_status %></p>
-          <p class="content-2"><%= "#{road_condition.comments.count} コメント" %></p>
-         <% end %>
+            <% if road_condition&.image.present? %>
+              <%= image_tag attachment_url(road_condition, :image), size: "200x133", class: "img-fluid" %>
+            <% else %>
+              <%= image_tag 'no_photo.png', size: "200x133", class: "img-fluid" %>
+            <% end %>
+          </div>      
+          <%= link_to road_condition_path(road_condition) do %>          
+            <p class="content-1"><%= road_condition.road_name %></p>
+            <p class="content-1"><%= road_condition.road_status %></p>
+            <p class="content-2"><%= "#{road_condition.comments.count} コメント" %></p>
+          <% end %>
         </div>
       </div>
       <% end %>

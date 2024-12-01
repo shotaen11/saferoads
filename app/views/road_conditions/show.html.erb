@@ -23,51 +23,55 @@
     <!-- 報告詳細部分 -->
     <div class="row mt-4 w-100">
       <div class="col-md-12">
-      <!-- 報告者 -->
-      <div class="col-md-12 mb-3 d-flex">
-        <p class="caption mb-0">報告者　：</p>
-        <p class="caption ml-2 mb-0"><%= @road_condition.user.present? ? @road_condition.user.name : "No-Name" %></p>
-      </div>
+        <!-- 報告者 -->
+        <div class="col-md-12 mb-3 d-flex">
+          <p class="caption mb-0">報告者　：</p>
+          <p class="caption ml-2 mb-0"><%= @road_condition.user.present? ? @road_condition.user.name : "No-Name" %></p>
+        </div>
 
-      <!-- 路線名 -->
-      <div class="col-md-12 mb-3 d-flex">
-        <p class="caption mb-0">路線名　：</p>
-        <p class="caption ml-2 mb-0"><%= @road_condition.road_name %></p>
-      </div>
+        <!-- 路線名 -->
+        <div class="col-md-12 mb-3 d-flex">
+          <p class="caption mb-0">路線名　：</p>
+          <p class="caption ml-2 mb-0"><%= @road_condition.road_name %></p>
+        </div>
 
-      <!-- 開始時刻 -->
-      <div class="col-md-12 mb-3 d-flex">
-        <p class="caption mb-0">開始時刻：</p>
-        <p class="caption ml-2 mb-0"><%= @road_condition.start_time.present? ? @road_condition.start_time.strftime('%Y-%m-%d %H:%M') : '未設定' %></p>
-      </div>
+        <!-- 開始時刻 -->
+        <div class="col-md-12 mb-3 d-flex">
+          <p class="caption mb-0">開始時刻：</p>
+          <p class="caption ml-2 mb-0"><%= @road_condition.start_time.present? ? @road_condition.start_time.strftime('%Y-%m-%d %H:%M') : '未設定' %></p>
+        </div>
 
-      <!-- 終了時刻未定 --> 
-      <div class="col-md-12 mb-3 d-flex">
-        <p class="caption mb-0">終了時刻：</p>
-        <p class="caption ml-2 mb-0">
-          <% if @road_condition.end_time_undefined? %>
-          終了時刻未定
-          <% else %>
-            <%= @road_condition.end_time.present? ? @road_condition.end_time.strftime('%Y-%m-%d %H:%M') : '未設定' %>
-          <% end %>
-        </p>
-      </div>
+        <!-- 終了時刻未定 --> 
+        <div class="col-md-12 mb-3 d-flex">
+          <p class="caption mb-0">終了時刻：</p>
+          <p class="caption ml-2 mb-0">
+            <% if @road_condition.end_time_undefined? %>
+              終了時刻未定
+            <% else %>
+              <%= @road_condition.end_time.present? ? @road_condition.end_time.strftime('%Y-%m-%d %H:%M') : '未設定' %>
+            <% end %>
+          </p>
+        </div>
     
-      <!-- 状況 -->
-      <div class="col-md-12 mb-3 d-flex">
-        <p class="caption mb-0">状況　　：</p>
-        <p class="caption ml-2 mb-0"><%= @road_condition.road_status %></p>
-      </div>
+        <!-- 状況 -->
+        <div class="col-md-12 mb-3 d-flex">
+          <p class="caption mb-0">状況　　：</p>
+          <p class="caption ml-2 mb-0"><%= @road_condition.road_status %></p>
+        </div>
 
-      <!-- 詳細内容 -->
-      <div class="col-md-12 mb-1 d-flex">
-        <p class="caption mb-0">詳細内容：</p>
-        <p><%= simple_format(@road_condition.description) %></p>
-      </div>
+        <!-- 詳細内容 -->
+        <div class="col-md-12 mb-1 d-flex">
+          <p class="caption mb-0">詳細内容：</p>
+          <p><%= simple_format(@road_condition.description) %></p>
+        </div>
 
         <!-- 添付画像 -->
         <div class="text-center mb-4">
-          <%= attachment_image_tag @road_condition, :image, format: 'jpeg', size: "600x600", class: "img-fluid" %>
+          <% if @road_condition.image.present? %>
+            <%= image_tag attachment_url(@road_condition, :image), size: "600x600", class: "img-fluid" %>
+          <% else %>
+            <%= image_tag 'no_photo.png', size: "600x600", class: "img-fluid" %>
+          <% end %>
         </div>
       </div>
     </div>
