@@ -12,6 +12,8 @@ class RoadCondition < ApplicationRecord
 
     # enum カラム名：{名前:番号}
     enum status: { published: 0, draft: 1 }
+    # mypageで下書き投稿を非表示にするため、スコープの定義
+    scope :published_only, -> { where(status: :published) }
 
     #   ユーザーidがFavoritesテーブルに存在するか
     def favorited_by?(user)

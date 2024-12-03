@@ -3,9 +3,10 @@ class UsersController < ApplicationController
     @users = User.page(params[:page]).per(5).reverse_order
   end
 
+  # 下書き投稿は、非表示
   def show
     @user = User.find(params[:id])
-    @road_conditions = @user.road_conditions.page(params[:page]).per(8).reverse_order
+    @road_conditions = @user.road_conditions.merge(RoadCondition.published_only).page(params[:page]).per(8).reverse_order
     @following_users = @user.following_user
     @follower_users = @user.follower_user
   end
