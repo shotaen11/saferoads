@@ -32,6 +32,18 @@
           <p class="caption ml-2 mb-0"><%= @road_condition.road_name %></p>
         </div>
 
+        <!-- 状況 -->
+        <div class="col-md-12 mb-3 d-flex">
+          <p class="caption mb-0">状況　　：</p>
+          <span class="road-status badge 
+            <%= 'bg-danger' if @road_condition.road_status == '通行止' %>
+            <%= 'bg-info' if @road_condition.road_status == '片側交互通行' %>
+            <%= 'bg-warning' if @road_condition.road_status == 'その他' %>
+            <%= 'bg-success' if @road_condition.road_status == '解除' %>">
+            <%= @road_condition.road_status %>
+          </span>
+        </div>
+
         <!-- 開始時刻 -->
         <div class="col-md-12 mb-3 d-flex">
           <p class="caption mb-0">開始時刻：</p>
@@ -50,12 +62,6 @@
           </p>
         </div>
     
-        <!-- 状況 -->
-        <div class="col-md-12 mb-3 d-flex">
-          <p class="caption mb-0">状況　　：</p>
-          <p class="caption ml-2 mb-0"><%= @road_condition.road_status %></p>
-        </div>
-
         <!-- 詳細内容 -->
         <div class="col-md-12 mb-1 d-flex">
           <p class="caption mb-0">詳細内容：</p>
