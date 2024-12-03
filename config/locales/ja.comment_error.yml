@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      comment: コメント
+    attributes:
+      comment:
+        comment: 'コメント'
+  errors:
+    messages:
+      blank: "を入力してください。"
+      too_long: "は%{count}文字以下で入力してください。"

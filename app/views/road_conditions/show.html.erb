@@ -8,7 +8,7 @@
     <!-- エラーメッセージ -->
     <% if @comment&.errors&.any? %>
       <div class="alert alert-danger mt-3 w-100">
-        <p><%= pluralize(@comment.errors.count, "件のエラー") %>が発生しました:</p>
+        <p><%= pluralize(@comment.errors.count, "件のエラー") %>が発生しました。</p>
         <ul>
           <% @comment.errors.full_messages.each do |message| %>
             <li><%= message %></li>

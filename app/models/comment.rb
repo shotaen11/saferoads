@@ -3,7 +3,7 @@ class Comment < ApplicationRecord
     belongs_to :road_condition
     has_many :comment_favorites, dependent: :destroy
 
-    validates :comment, presence: true, length: { maximum: 35 }
+    validates :comment, presence: true, length: { maximum: 150 }
 
     #   ユーザーidがCommentFavoritesテーブルに存在するか
     def favorited_by?(user)
