@@ -6,14 +6,22 @@
     </div>
 
     <!-- エラー表示 -->
-    <% if @road_condition.errors.any? %>
-    <div class="card text-center text-white bg-danger mt-3">
-      <%= @road_condition.errors.count %>件のエラーが発生しました
-      <% @road_condition.errors.full_messages.each do |message| %>
-        <%= message %>
-      <% end %>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+        <% if @road_condition.errors.any? %>
+          <div class="card-errors text-start text-white bg-danger mt-3">
+            <%= @road_condition.errors.count %>件のエラーが発生しました。
+            <ul>
+              <% @road_condition.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+        </div>
       </div>
-    <% end %>
+    </div>
 
     <!-- フォーム部分 -->
     <div class="row mt-3">

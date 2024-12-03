@@ -227,3 +227,14 @@
   display: flex;
   align-items: center;
 }
+
+// エラー表示
+.card-errors {
+  max-width: 600px; /* 最大幅を指定 */
+  margin: 20px auto; /* 上下に20pxの余白、左右を自動で中央揃え */
+  text-align: center; /* テキストを中央揃え */
+  color: #721c24; /* テキストカラー */
+  padding: 15px; /* 内側の余白 */
+  border-radius: 8px; /* 角を丸める */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
+}
