@@ -7,3 +7,16 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+categories = [
+  "通行規制",
+  "落石・土砂流入等",
+  "落下物",
+  "路面異常",
+  "構造物の損傷",
+  "事故",
+  "動物の死骸",
+  "その他"
+]
+categories.each do |category_name|
+    Category.find_or_create_by(name: category_name)
+end

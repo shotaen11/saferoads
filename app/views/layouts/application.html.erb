@@ -5,24 +5,34 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
   </head>
 
   <body>
-   <% if user_signed_in? %>
-    <header>
+    <% if user_signed_in? %>
+      <header>
       <div><%= link_to root_path, class: "text-white nav-link" do %>SafeRoads<% end %></div>
-      <div><%= link_to "トップ", root_path, class: "text-white nav-link" %></div>
-      <div><%= link_to "報告一覧", road_conditions_path, class: "text-white nav-link" %></div>
-      <div><%= link_to "報告する", new_road_condition_path, class: "text-white nav-link" %></div>
-      <div><%= link_to "下書き一覧", confirm_road_conditions_path, class: "text-white nav-link" %></div>
-      <div><%= link_to "ユーザ一覧", users_path, class: "text-white nav-link" %></div>
-      <div><%= link_to "マイページ", user_path(current_user.id), class: "text-white nav-link" %></div>
-      <div><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-white nav-link" %></div>
-    </header>
-   <% end %>
-   <%= yield %>
+      <!-- ハンバーガーメニューボタン -->
+      <button class="hamburger-menu" id="js-hamburger-menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <!-- ナビゲーションメニュー -->
+      <nav class="navigation">
+        <div><%= link_to "トップ", root_path, class: "text-white nav-link" %></div>
+        <div><%= link_to "報告一覧", road_conditions_path, class: "text-white nav-link" %></div>
+        <div><%= link_to "報告する", new_road_condition_path, class: "text-white nav-link" %></div>
+        <div><%= link_to "下書き一覧", confirm_road_conditions_path, class: "text-white nav-link" %></div>
+        <div><%= link_to "ユーザ一覧", users_path, class: "text-white nav-link" %></div>
+        <div><%= link_to "マイページ", user_path(current_user.id), class: "text-white nav-link" %></div>
+        <div><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete }, class: "text-white nav-link" %></div>
+      </nav>
+      </header>
+    <% end %>
+    <%= yield %>
   </body>
 </html>

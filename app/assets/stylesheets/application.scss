@@ -63,3 +63,93 @@
  .profile-img {
    border-radius: 50%;
  }
+/* ハンバーガーメニューのスタイル */
+.hamburger-menu {
+  width: 50px;
+  height: 50px;
+  position: relative;
+  border: none;
+  background: transparent;
+  appearance: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.hamburger-bar {
+  display: inline-block;
+  width: 44%;
+  height: 2px;
+  background: #ffffff;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: .5s;
+}
+.hamburger-bar:first-child {
+  top: 16px;
+}
+.hamburger-bar:nth-child(2) {
+  top: 24px;
+}
+.hamburger-bar:last-child {
+  top: 32px;
+}
+.hamburger-menu--open .hamburger-bar {
+  top: 50%;
+}
+.hamburger-menu--open .hamburger-bar:first-child {
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+.hamburger-menu--open .hamburger-bar:last-child {
+  transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+}
+.hamburger-menu--open .hamburger-bar:nth-child(2) {
+  display: none;
+}
+
+/* ナビゲーションメニュー */
+.navigation {
+  display: none;
+  background: #242424;
+  position: absolute;
+  top: 50px;
+  width: 100%;
+  z-index: 9999;
+}
+
+.navigation div {
+  margin: 0 10px;
+}
+.nav-link:hover {
+  background: #fcfcfc;
+}
+/* 初期状態ではナビゲーションメニューを隠す */
+.navigation {
+  display: none;
+}
+
+/* ハンバーガーメニューが開いたときのスタイル */
+.navigation.open {
+  display: block;
+}
+
+/* 小さい画面（スマートフォン）の場合 */
+@media screen and (max-width: 768px) {
+  .navigation {
+    display: none; /* デフォルトで非表示 */
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #333;
+  }
+
+  .hamburger-menu {
+    display: flex; /* 小さい画面でハンバーガーメニューを表示 */
+  }
+
+  .navigation.active {
+    display: flex; /* トグルで表示 */
+  }
+}
