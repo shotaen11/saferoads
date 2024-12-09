@@ -38,7 +38,7 @@
     <div class="d-flex">
       <%= link_to follows_user_path(@user) do %>
         <h6>フォロー <%= @following_users.count %></h6>
-      <% end %>
+      <% end %> / 
       <%= link_to followers_user_path(@user) do %>
         <h6>フォロワー <%= @follower_users.count %></h6>
       <% end %>
@@ -60,7 +60,15 @@
               <%= link_to road_condition_path(road_condition) do %>
                 <p class="card-title"><%= road_condition.road_name %></p>
               <% end %>
-                <p class="card-text"><%= road_condition.road_status %></p>
+                <p class="card-text">
+                  <span class="road-status badge 
+                    <%= 'bg-danger' if road_condition.road_status == '通行止' %>
+                    <%= 'bg-info' if road_condition.road_status == '片側交互通行' %>
+                    <%= 'bg-warning' if road_condition.road_status == 'その他' %>
+                    <%= 'bg-success' if road_condition.road_status == '解除' %>">
+                    <%= road_condition.road_status %>
+                  </span>
+                </p>
                 <p class="text-muted"><%= "#{road_condition.comments.count} コメント" %></p>
             </div>
           </div>

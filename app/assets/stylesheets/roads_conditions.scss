@@ -70,7 +70,7 @@
   gap: 1.5rem; /* カード間の間隔 */
 }
 
-.one-post {
+.index-one-post {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* アニメーション */
   border: 1px solid #ddd; /* ボーダーで区切り */
   border-radius: 12px; /* 丸みをつける */
@@ -78,12 +78,12 @@
   background-color: #fff; /* カード背景 */
 }
 
-.one-post:hover {
+.index-one-post:hover {
   transform: translateY(-10px); /* カードを少し浮かせる */
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* ホバー時の影 */
 }
 
-.card-title {
+.index-card-title {
   font-size: 1.2rem;
   font-weight: bold;
   color: #343a40; /* テキスト色 */

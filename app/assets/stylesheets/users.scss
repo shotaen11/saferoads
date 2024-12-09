@@ -15,6 +15,7 @@
   border-radius: 8px; /* カードの角を丸くする */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 影を追加 */
   overflow: hidden; /* カード内で要素がはみ出さないようにする */
+  margin-bottom: 20px; /* カード間のスペース */
 }
 
 /* 画像部分 */
@@ -63,4 +64,31 @@
   padding: 15px;
   background-color: #f8f9fa;
   border-radius: 8px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .one-post {
+    width: 100%; /* スマホなどの小さい画面ではカード幅100%に */
+  }
+}
+
+/* デスクトップ用 */
+@media (min-width: 769px) {
+  .row {
+    display: flex;
+    flex-wrap: wrap; /* 横並びにカードを表示 */
+    justify-content: space-between; /* カード間にスペースを設ける */
+  }
+
+  .one-post {
+    width: calc(33.333% - 20px); /* 3列表示 */
+    margin-bottom: 20px; /* カード間のスペース */
+  }
 }
