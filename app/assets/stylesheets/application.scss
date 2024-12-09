@@ -35,14 +35,14 @@ header {
   align-items: center;
 }
 
-header div:first-child {
+.header-title {
   margin-right: auto;
   font-size: 25px;
   color: white;
 }
 
 header div {
-  margin-left: 30px;
+  margin-left: 10px;
   line-height: 30px;
 }
 
@@ -111,6 +111,7 @@ header div {
   transform: translateX(-50%) translateY(-50%) rotate(-45deg);
 }
 
+// 真ん中のバーを非表示
 .hamburger-menu--open .hamburger-bar:nth-child(2) {
   display: none;
 }
@@ -127,7 +128,7 @@ header div {
     height: calc(100vh - 60px); /* ヘッダーを除く高さ */
     background-color: #333;
     z-index: 1000; /* 最前面に表示 */
-    padding: 10px 0;
+    padding: 24px 0;
     overflow-y: auto; /* メニュー内のスクロール対応 */
   }
 
@@ -143,6 +144,22 @@ header div {
     color: white;
     text-align: center;
     padding: 10px 0;
+    width: 100%; /* リスト全体の幅を100%に */
+    display: flex;
+    justify-content: center; /* 横方向中央寄せ */
+    align-items: center; /* 縦方向中央寄せ */
+  }
+
+  .nav-link:hover {
+    background-color: #444; /* ホバー時の背景色 */
+  }
+
+  .navigation div:not(:last-child) {
+    border-bottom: 1px solid #555; /* 各リスト間の境界線 */
+  }
+
+  .navigation div:last-child {
+    margin-bottom: 0; /* 最下段の余白をなくす */
   }
 
   /* メニューが開いたとき、bodyのスクロールを防ぐ */
