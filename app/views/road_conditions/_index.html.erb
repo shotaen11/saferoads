@@ -1,35 +1,47 @@
-
-<div class="row mt-3 mb-3 justify-content-end">
-  <%= form_with method: :get, road_name: true do |f| %>
-    <%= f.text_field :search %>
-    <%= f.submit '検索する', name: nil %>
+<div class="row mt-3 mb-3 w-80 justify-content-end">
+  <%= form_with method: :get, class: "d-flex" do |f| %>
+    <div class="input-group">
+      <%= f.text_field :search, placeholder: "キーワードを入力", class: "form-control" %>
+      <%= f.submit '検索する', name: nil %>
+    </div>
   <% end %>
 </div>
 
-<!-- 報告案件の一覧部分 -->
-<div class="row mt-5 index-left w-100 justify-content-center">
-<% road_conditions.each do |road_condition| %>
-  <div class="col-md-3 col-lg-3 mb-3"> <!-- 中サイズ以上で3列に分ける -->
-    <div class="index-one-post card shadow-sm p-3">
-      <div class="card-body">
-        <!-- 路線名 -->
-        <h5 class="index-card-title">
-          <%= link_to road_condition.road_name, road_condition_path(road_condition), class: "road-link" %>
-        </h5>
-
-        <!-- 状況 -->
-        <p class="caption text-muted">状況</p>
-        <span class="road-status badge 
-          <%= 'bg-danger' if road_condition.road_status == '通行止' %>
-          <%= 'bg-info' if road_condition.road_status == '片側交互通行' %>
-          <%= 'bg-warning' if road_condition.road_status == 'その他' %>
-          <%= 'bg-success' if road_condition.road_status == '解除' %>">
-          <%= road_condition.road_status %>
-        </span>
-      </div>
-    </div>
+<!-- エラーメッセージの表示 -->
+<% if params[:search].present? && road_conditions.empty? %>
+  <div class="alert alert-danger">
+    該当する報告案件はありません。
+  </div>
+<% elsif params[:search].blank? && request.query_parameters.present? %>
+  <div class="alert alert-warning">
+    キーワードを入力してください。
   </div>
 <% end %>
+
+<!-- 報告案件の一覧部分 -->
+<div class="row mt-5 index-left w-100 justify-content-center">
+  <% road_conditions.each do |road_condition| %>
+    <div class="col-md-3 col-lg-3 mb-3"> <!-- 中サイズ以上で3列に分ける -->
+      <div class="index-one-post card shadow-sm p-3">
+        <div class="card-body">
+          <!-- 路線名 -->
+          <h5 class="index-card-title">
+            <%= link_to road_condition.road_name, road_condition_path(road_condition), class: "road-link" %>
+          </h5>
+
+          <!-- 状況 -->
+          <p class="caption text-muted">状況</p>
+          <span class="road-status badge 
+            <%= 'bg-danger' if road_condition.road_status == '通行止' %>
+            <%= 'bg-info' if road_condition.road_status == '片側交互通行' %>
+            <%= 'bg-warning' if road_condition.road_status == 'その他' %>
+            <%= 'bg-success' if road_condition.road_status == '解除' %>">
+            <%= road_condition.road_status %>
+          </span>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <!-- ページネーション -->

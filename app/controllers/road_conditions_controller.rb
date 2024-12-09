@@ -16,20 +16,22 @@ class RoadConditionsController < ApplicationController
     end
   end
   
-
   # 道路状況の一覧を表示
   def index
-    # ページネーションを設定して最新順に並べる
+    # 初期設定: 公開された道路状況をページネーションと共に取得
     @road_conditions = RoadCondition.published.page(params[:page]).reverse_order
-   # 検索条件を動的に追加
+    
+    # 検索条件を動的に追加
     if params[:search].present?
       @road_conditions = @road_conditions.where(
-       'road_name LIKE :search OR road_status LIKE :search OR description LIKE :search',
-       search: "%#{params[:search]}%"
+        'road_name LIKE :search OR road_status LIKE :search OR description LIKE :search OR category_id LIKE :search',
+        search: "%#{params[:search]}%"
       )
+    else
+      flash.now[:alert] = 'キーワードを入力してください。'
     end
   end
-
+  
   # 特定の道路状況の詳細を表示
   def show
     @road_condition = RoadCondition.find(params[:id])
