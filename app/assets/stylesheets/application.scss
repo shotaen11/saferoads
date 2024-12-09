@@ -27,44 +27,45 @@
    display: none;
  }
  
- header {
-   display: flex;
-   background-color: black;
- }
- 
- header div:first-child {
-   margin-right: auto;
-   font-size: 25px;
- }
- 
- header div {
-   margin-left: 30px;
-   line-height: 30px;
- }
- 
- a {
-   text-decoration: none;
- }
- 
- a:hover {
-   color: #25ceff !important;
-   text-decoration: underline;
- }
- 
- #head-top {
-   text-decoration: none;
-   font-size: 25px;
- }
- 
- .nav-link {
-   text-decoration: none;
- }
- 
- .profile-img {
-   border-radius: 50%;
- }
-/* ハンバーガーメニューのスタイル */
+/* 通常のスタイル */
+header {
+  display: flex;
+  background-color: black;
+  padding: 10px 20px;
+  align-items: center;
+}
+
+header div:first-child {
+  margin-right: auto;
+  font-size: 25px;
+  color: white;
+}
+
+header div {
+  margin-left: 30px;
+  line-height: 30px;
+}
+
+/* 通常のナビゲーション */
+.navigation {
+  display: flex;
+  gap: 20px;
+}
+
+/* ナビゲーションリンク */
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #25ceff;
+  text-decoration: underline;
+}
+
+/* ハンバーガーメニュー */
 .hamburger-menu {
+  display: none; /* デスクトップでは非表示 */
   width: 50px;
   height: 50px;
   position: relative;
@@ -83,73 +84,69 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  transition: .5s;
+  transition: 0.5s;
 }
+
 .hamburger-bar:first-child {
   top: 16px;
 }
+
 .hamburger-bar:nth-child(2) {
   top: 24px;
 }
+
 .hamburger-bar:last-child {
   top: 32px;
 }
+
 .hamburger-menu--open .hamburger-bar {
   top: 50%;
 }
+
 .hamburger-menu--open .hamburger-bar:first-child {
   transform: translateX(-50%) translateY(-50%) rotate(45deg);
 }
+
 .hamburger-menu--open .hamburger-bar:last-child {
   transform: translateX(-50%) translateY(-50%) rotate(-45deg);
 }
+
 .hamburger-menu--open .hamburger-bar:nth-child(2) {
   display: none;
 }
 
-/* ナビゲーションメニュー */
-.navigation {
-  display: none;
-  background: #242424;
-  position: absolute;
-  top: 50px;
-  width: 100%;
-  z-index: 9999;
-}
-
-.navigation div {
-  margin: 0 10px;
-}
-.nav-link:hover {
-  background: #fcfcfc;
-}
-/* 初期状態ではナビゲーションメニューを隠す */
-.navigation {
-  display: none;
-}
-
-/* ハンバーガーメニューが開いたときのスタイル */
-.navigation.open {
-  display: block;
-}
-
-/* 小さい画面（スマートフォン）の場合 */
+/* モバイル用ナビゲーションメニュー */
 @media screen and (max-width: 768px) {
   .navigation {
-    display: none; /* デフォルトで非表示 */
+    display: none; /* 初期状態で非表示 */
     flex-direction: column;
-    position: absolute;
+    position: fixed; /* 固定表示に変更 */
     top: 60px;
     left: 0;
-    right: 0;
+    width: 100%;
+    height: calc(100vh - 60px); /* ヘッダーを除く高さ */
     background-color: #333;
+    z-index: 1000; /* 最前面に表示 */
+    padding: 10px 0;
+    overflow-y: auto; /* メニュー内のスクロール対応 */
+  }
+
+  .navigation.open {
+    display: flex; /* メニューを開いたとき表示 */
   }
 
   .hamburger-menu {
-    display: flex; /* 小さい画面でハンバーガーメニューを表示 */
+    display: block; /* モバイル画面で表示 */
   }
 
-  .navigation.active {
-    display: flex; /* トグルで表示 */
+  .nav-link {
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  /* メニューが開いたとき、bodyのスクロールを防ぐ */
+  body.menu-open {
+    overflow: hidden;
   }
 }

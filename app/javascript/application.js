@@ -6,13 +6,13 @@ import "@hotwired/turbo-rails"
 import "controllers"
 
 // ハンバーガーメニューをクリックしたときにナビゲーションを表示/非表示にする
-document.addEventListener("DOMContentLoaded", function() {
-    const hamburgerMenu = document.getElementById("js-hamburger-menu");
-    const navigation = document.querySelector(".navigation");
-  
-    hamburgerMenu.addEventListener("click", function() {
-      // メニューが開いている場合は閉じ、閉じている場合は開く
-      navigation.classList.toggle("open");
-    });
-  });
-  
+// ハンバーガーメニューの初期化スクリプト
+document.addEventListener("turbo:load", function () {
+        const hamburger = document.getElementById("js-hamburger-menu");
+        const navigation = document.querySelector(".navigation");
+      
+        hamburger.addEventListener("click", function () {
+          const isOpen = navigation.classList.toggle("open");
+          document.body.classList.toggle("menu-open", isOpen);
+        });
+      });
