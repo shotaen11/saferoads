@@ -85,24 +85,18 @@
     </div>
 
     <!-- 確認ボタン -->
-    <div class="row mt-3 w-100">
+    <div class="row mt-3 w-100" id="favorite_section_<%= @road_condition.id %>">
       <div class="col text-left">
-        <% if @road_condition.favorited_by?(current_user) %>
-          <%= link_to road_condition_favorites_path(@road_condition), 
-                      data: { turbo_method: :delete }, 
-                      class: "btn btn-outline-danger" do %>
-            確認しましたを取り消す
-          <% end %>
-        <% else %>
-          <%= link_to road_condition_favorites_path(@road_condition), 
-                      data: { turbo_method: :post }, 
-                      class: "btn btn-outline-success" do %>
-            確認しました
+        <%= turbo_frame_tag "favorite" do %>
+          <% if @favorite %>
+            <%= render partial: "favorite", locals: { favorite: @favorite } %>
+          <% else %>
+            <%= render partial: "favorite", locals: { road_condition: @road_condition } %>
           <% end %>
         <% end %>
-        <p class="favorite-count mt-2"><%= @road_condition.favorites.count %>人が確認しました</p>
       </div>
     </div>
+    
 
     <!-- 編集と削除リンク -->
     <div class="row mt-3 w-100">

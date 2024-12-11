@@ -24,4 +24,8 @@ class RoadCondition < ApplicationRecord
     def end_time_undefined?
       self.end_time_undefined == true
     end
+
+    def favorited_by?(user)
+      favorites.exists?(user_id: user.id)
+    end
 end

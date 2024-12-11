@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         validates :name, presence: true
+  validates :name, presence: true
 
   has_many :road_conditions, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -32,5 +32,23 @@ class User < ApplicationRecord
   # フォローしている場合、trueを返す
   def following?(user)
     following_user.include?(user)
+  end
+
+  # お気に入り登録された投稿を取得
+  has_many :favorited_road_conditions, through: :favorites, source: :road_condition
+
+  # お気に入り登録
+  def favorite(road_condition)
+    favorited_road_conditions << road_condition unless favorited_road_conditions.include?(road_condition)
+  end
+
+  # お気に入り解除
+  def unfavorite(road_condition)
+    favorited_road_conditions.delete(road_condition)
+  end
+
+  # お気に入り登録されているか確認
+  def favorited_by?(road_condition)
+    favorited_road_conditions.include?(road_condition)
   end
 end

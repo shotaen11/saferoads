@@ -4,6 +4,8 @@ import "jquery"  // importmapからjQueryを読み込み
 import "bootstrap"
 import "@hotwired/turbo-rails"
 import "controllers"
+import { Turbo } from "@hotwired/turbo-rails";
+
 
 // ハンバーガーメニューをクリックしたときにナビゲーションを表示/非表示にする
 // ハンバーガーメニューの初期化スクリプト

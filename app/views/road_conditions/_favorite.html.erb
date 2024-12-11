@@ -1,0 +1,15 @@
+<%= turbo_frame_tag dom_id(road_condition, :favorite) do %>
+    <% if road_condition.favorited_by?(current_user) %>
+      <%= button_to "確認しましたを取り消す", 
+                    road_condition_favorites_path(road_condition), 
+                    method: :delete, 
+                    class: "btn btn-outline-danger" %>
+    <% else %>
+      <%= button_to "確認しました", 
+                    road_condition_favorites_path(road_condition_id: road_condition.id), 
+                    method: :post, 
+                    class: "btn btn-outline-success" %>
+    <% end %>
+    <span class="ml-2 text-muted"><%= road_condition.favorites.count %>人が確認しました</span>
+  <% end %>
+  

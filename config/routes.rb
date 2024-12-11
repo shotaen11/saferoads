@@ -7,12 +7,12 @@ Rails.application.routes.draw do
     end
     resource :relationships, only: [:create, :destroy]
   end  
-  
+
   resources :road_conditions do
     resources :comments, only: [:create, :destroy] do
       resource :comment_favorites, only: [:create, :destroy]
     end
-    resource :favorites, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy]  
     
     collection do
       get 'confirm'  # confirm用のアクション

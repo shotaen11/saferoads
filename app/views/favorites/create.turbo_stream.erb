@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "favorite_section_#{@road_condition.id}" do %>
+  <%= render partial: "road_conditions/favorite", locals: { road_condition: @road_condition } %>
+<% end %>
