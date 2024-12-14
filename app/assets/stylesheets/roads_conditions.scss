@@ -238,3 +238,48 @@
   border-radius: 8px; /* 角を丸める */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 影を追加 */
 }
+/* 検索窓。*/
+/* フォームのスタイル */
+.form2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.input-group {
+  display: flex;
+  width: 100%;
+  max-width: 100%;
+  gap: 1px;
+}
+
+.form2-input,
+.form2-button {
+  height: 40px;  /* 高さを統一 */
+}
+
+.form2-input {
+  box-sizing: border-box;
+  width: calc(100% - 80px);  /* 入力フィールドの幅調整 */
+  padding: 0 10px;
+  font-size: 1em;
+  color: #333;
+  border: solid 1px #ccc;
+  border-radius: 5px;
+  outline: 0;
+}
+
+.form2-button {
+  width: 70px;  /* ボタンの幅を固定 */
+  padding: 0 10px;  /* ボタンの内部のパディングを調整 */
+  font-size: 0.8em;
+  color: #fff;
+  background-color: #0e0e0e;
+  border: 1px solid #0e0e0e;
+  border-radius: 3px;
+  cursor: pointer;
+}

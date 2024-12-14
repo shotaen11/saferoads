@@ -71,6 +71,16 @@ class RoadConditionsController < ApplicationController
   # 下書き
   def confirm
     @road_conditions = current_user.road_conditions.draft.page(params[:page]).reverse_order
+
+    # 検索条件を動的に追加
+    if params[:search].present?
+      @road_conditions = @road_conditions.where(
+        'road_name LIKE :search OR road_status LIKE :search OR description LIKE :search OR category_id LIKE :search',
+        search: "%#{params[:search]}%"
+      )
+    else
+      flash.now[:alert] = 'キーワードを入力してください。'
+    end 
   end
 
   private

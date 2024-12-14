@@ -27,3 +27,9 @@
     display: table-cell;
     vertical-align: middle;
   }
+
+/* 固定のサイズを指定 */
+img {
+  width: 500px;      /* 幅を200pxに指定 */
+  height: auto;      /* 高さは自動で調整（アスペクト比を維持） */
+}

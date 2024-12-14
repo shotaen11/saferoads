@@ -46,6 +46,36 @@ header div {
   line-height: 30px;
 }
 
+/* ロゴ画像のスタイル */
+.logo {
+  width: 180px;
+  height: auto;
+}
+
+/* 通知アイコンのスタイル */
+.notification-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* アンダーラインのエフェクト */
+a::after {
+  position: absolute;
+  left: 0;
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #fcfcfc;
+  bottom: -1px;
+  transform: scale(0, 1);
+  transform-origin: center top; /* 変形（アンダーラインの伸長）の原点がaタグ（各メニュー）の右端 */
+  transition: transform 0.3s;   /* 変形の時間 */
+}
+
+a:hover::after {
+  transform: scale(1, 1); /* ホバー後、x軸方向に1（相対値）伸長 */
+}
+
 /* 通常のナビゲーション */
 .navigation {
   display: flex;
@@ -56,11 +86,12 @@ header div {
 .nav-link {
   color: white;
   text-decoration: none;
+  position: relative; /* ::afterを使うために位置を相対に */
 }
 
 .nav-link:hover {
   color: #25ceff;
-  text-decoration: underline;
+  text-decoration: none; /* 既存の下線を削除 */
 }
 
 /* ハンバーガーメニュー */
