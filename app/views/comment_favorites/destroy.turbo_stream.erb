@@ -1,0 +1,4 @@
+<%= turbo_stream.replace dom_id(@comment, :favorite) do %>
+    <%= render partial: "road_conditions/comment_favorite", locals: { comment: @comment } %>
+  <% end %>
+  

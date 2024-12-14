@@ -1,0 +1,17 @@
+<%= turbo_frame_tag dom_id(comment, :favorite) do %>
+    <% if current_user.comment_favorited?(comment) %>
+      <%= button_to "確認しましたを取り消す", 
+                    road_condition_comment_comment_favorites_path(comment.road_condition_id, comment.id),
+                    method: :delete, 
+                    data: { turbo_frame: "_top" },
+                    class: "btn btn-outline-danger" %>
+    <% else %>
+      <%= button_to "確認しました", 
+      road_condition_comment_comment_favorites_path(comment.road_condition_id, comment.id), 
+                    method: :post, 
+                    data: { turbo_frame: "_top" },
+                    class: "btn btn-outline-success" %>
+    <% end %>
+    <span class="ml-2 text-muted"><%= comment.comment_favorites.count %>人が確認しました</span>
+  <% end %>
+  

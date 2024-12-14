@@ -1,15 +1,22 @@
 class CommentFavoritesController < ApplicationController
+    before_action :authenticate_user!
+  
     def create
-        comment = Comment.find(params[:comment_id])
-        comment_favorite = current_user.comment_favorites.new(comment_id: comment.id)
-        comment_favorite.save
-        redirect_to road_condition_path(comment.road_condition)
+      @comment = Comment.find(params[:comment_id])
+      current_user.favorite_comment(@comment)
+  
+      respond_to do |format|
+        format.turbo_stream
+      end
     end
-
+  
     def destroy
-        comment = Comment.find(params[:comment_id])
-        comment_favorite = current_user.comment_favorites.find_by(comment_id: comment.id)
-        comment_favorite.destroy
-        redirect_to road_condition_path(comment.road_condition)
+      @comment = Comment.find(params[:comment_id])
+      current_user.unfavorite_comment(@comment)
+  
+      respond_to do |format|
+        format.turbo_stream
+      end
     end
-end
+  end
+  

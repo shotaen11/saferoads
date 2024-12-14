@@ -51,4 +51,17 @@ class User < ApplicationRecord
   def favorited_by?(road_condition)
     favorited_road_conditions.include?(road_condition)
   end
+
+  # コメントの「確認しました」関連メソッド
+  def favorite_comment(comment)
+    CommentFavorite.create(user: self, comment: comment)
+  end
+
+  def unfavorite_comment(comment)
+    CommentFavorite.find_by(user: self, comment: comment)&.destroy
+  end
+
+  def comment_favorited?(comment)
+    CommentFavorite.exists?(user: self, comment: comment)
+  end
 end
