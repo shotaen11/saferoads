@@ -37,3 +37,9 @@
     transform: translateY(-2px); /* ホバー時の軽い浮き上がり */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* ホバー時の影 */
 }
+
+.list-group-item-unread {
+    font-weight: bold;
+    background-color: #f0f8ff; /* 青っぽい色で未読通知を強調 */
+  }
+  

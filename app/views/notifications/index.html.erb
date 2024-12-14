@@ -11,19 +11,26 @@
         <ul class="list-group">
           <% if @notifications.any? %>
             <% @notifications.each do |notification| %>
-              <li class="list-group-item">
+              <li class="list-group-item <%= 'list-group-item-unread' if notification.checked == false %>">
                 <% if notification.action == 'favorite' %>
-                  <%= link_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}を確認しました。",
-                              road_condition_path(notification.road_condition),
-                              class: "text-primary" %>
+                  <%= button_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}を確認しました。",
+                              notification_path(notification),
+                              method: :patch,
+                              class: "text-primary btn btn-link" %>
                 <% elsif notification.action == 'comment' %>
-                  <%= link_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}にコメントしました。",
+                  <%= button_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}にコメントしました。",
+                              notification_path(notification),
+                              method: :patch,
+                              class: "text-primary btn btn-link" %>
+                <% elsif notification.action.in?(%w[comment comment_favorites]) %>
+                  <%= button_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}のコメントを確認しました。",
                               road_condition_path(notification.road_condition),
-                              class: "text-primary" %>
+                              method: :patch,
+                              class: "text-primary btn btn-link" %>
                 <% end %>
               </li>
             <% end %>
-          <% else %>
+            <% else %>
             <li class="list-group-item text-center">通知がありません。</li>
           <% end %>
         </ul>
