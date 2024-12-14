@@ -1,0 +1,33 @@
+<div class="cover-2">
+  <div class="container align-items-center">
+    <!-- タイトル部分 -->
+    <div class="row">
+      <h2 class="title font-weight-normal mt-3 mb-5">通知一覧</h2>
+    </div>
+
+    <!-- 通知リスト -->
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <ul class="list-group">
+          <% if @notifications.any? %>
+            <% @notifications.each do |notification| %>
+              <li class="list-group-item">
+                <% if notification.action == 'favorite' %>
+                  <%= link_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}を確認しました。",
+                              road_condition_path(notification.road_condition),
+                              class: "text-primary" %>
+                <% elsif notification.action == 'comment' %>
+                  <%= link_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}にコメントしました。",
+                              road_condition_path(notification.road_condition),
+                              class: "text-primary" %>
+                <% end %>
+              </li>
+            <% end %>
+          <% else %>
+            <li class="list-group-item text-center">通知がありません。</li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

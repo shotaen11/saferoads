@@ -24,6 +24,8 @@
         </button>
         <!-- ナビゲーションメニュー -->
         <nav class="navigation">
+          <div class="text-white">こんにちは！<%= current_user.name %>さん</div>
+          <div><%= link_to "通知 (#{current_user.passive_notifications&.unchecked&.count || 0})", notifications_path, class: "text-white nav-link" %></div>
           <div><%= link_to "トップ", root_path, class: "text-white nav-link" %></div>
           <div><%= link_to "報告一覧", road_conditions_path, class: "text-white nav-link" %></div>
           <div><%= link_to "報告する", new_road_condition_path, class: "text-white nav-link" %></div>

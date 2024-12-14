@@ -18,4 +18,17 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     road_conditions_path
   end
+
+  def create_notification(road_condition:, visiter:, visited:, action:, comment: nil)
+    return if visiter == visited # 自分に通知しない
+
+    Notification.create!(
+      road_condition: road_condition,
+      visiter: visiter,
+      visited: visited,
+      action: action,
+      comment: comment,
+      checked: false
+    )
+  end
 end

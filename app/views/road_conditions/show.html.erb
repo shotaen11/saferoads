@@ -89,9 +89,9 @@
       <div class="col text-left">
         <%= turbo_frame_tag "favorite" do %>
           <% if @favorite %>
-            <%= render partial: "favorite", locals: { favorite: @favorite } %>
+            <%= render partial: "road_conditions/favorite", locals: { favorite: @favorite } %>
           <% else %>
-            <%= render partial: "favorite", locals: { road_condition: @road_condition } %>
+            <%= render partial: "road_conditions/favorite", locals: { road_condition: @road_condition } %>
           <% end %>
         <% end %>
       </div>
@@ -149,7 +149,7 @@
               <% if comment.user == current_user %>
                 <%= link_to "削除", 
                            road_condition_comment_path(comment.road_condition, comment),  
-                           data: { turbo_method: :delete }, 
+                           data: { turbo_method: :delete, turbo_confirm: "本当に消しますか？" }, 
                            class: "btn btn-sm btn-danger ml-3" %>
               <% end %>
             </div>

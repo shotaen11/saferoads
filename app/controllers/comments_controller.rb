@@ -5,6 +5,15 @@ class CommentsController < ApplicationController
         @comment = current_user.comments.new(comment_params)
         @comment.road_condition_id = @road_condition.id
         if @comment.save
+        # 通知を作成
+        create_notification(
+        road_condition: @road_condition,
+        visiter: current_user,
+        visited: @road_condition.user,
+        action: 'comment',
+        comment: @comment
+        )
+        
           redirect_to road_condition_path(@road_condition)
         else
           # @commentを再描画時にも利用可能にするため初期化
