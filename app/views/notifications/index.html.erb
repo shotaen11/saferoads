@@ -6,34 +6,18 @@
     </div>
 
     <!-- 通知リスト -->
-    <div class="row justify-content-center">
-      <div class="col-md-8">
-        <ul class="list-group">
-          <% if @notifications.any? %>
-            <% @notifications.each do |notification| %>
-              <li class="list-group-item <%= 'list-group-item-unread' if notification.checked == false %>">
-                <% if notification.action == 'favorite' %>
-                  <%= button_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}を確認しました。",
-                              notification_path(notification),
-                              method: :patch,
-                              class: "text-primary btn btn-link" %>
-                <% elsif notification.action == 'comment' %>
-                  <%= button_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}にコメントしました。",
-                              notification_path(notification),
-                              method: :patch,
-                              class: "text-primary btn btn-link" %>
-                <% elsif notification.action.in?(%w[comment comment_favorites]) %>
-                  <%= button_to "#{notification.visiter.name}さんが#{notification.road_condition.road_name}のコメントを確認しました。",
-                              road_condition_path(notification.road_condition),
-                              method: :patch,
-                              class: "text-primary btn btn-link" %>
-                <% end %>
-              </li>
-            <% end %>
-            <% else %>
-            <li class="list-group-item text-center">通知がありません。</li>
-          <% end %>
-        </ul>
+    <div class="container d-flex flex-column align-items-center">
+      <ul class="list-group">
+      <% notifications = @notifications.where.not(visiter_id: current_user.id) %>
+        <!-- 自分の投稿に対する確認しました、コメントは通知に表示しない -->
+        <% if notifications.exists? %>
+          <%= render notifications %>
+          <%= paginate notifications %>
+        <% else %>
+          <p>通知はありません</p>
+        <% end %>
+
+    </ul>
       </div>
     </div>
   </div>

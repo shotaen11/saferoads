@@ -6,13 +6,7 @@ class CommentsController < ApplicationController
         @comment.road_condition_id = @road_condition.id
         if @comment.save
         # 通知を作成
-        create_notification(
-        road_condition: @road_condition,
-        visiter: current_user,
-        visited: @road_condition.user,
-        action: 'comment',
-        comment: @comment
-        )
+          @road_condition.create_notification_comment!(current_user, @comment.id)
         
           redirect_to road_condition_path(@road_condition)
         else

@@ -5,6 +5,7 @@ class RoadCondition < ApplicationRecord
     belongs_to :category
     has_many :comments, dependent: :destroy
     has_many :favorites, dependent: :destroy
+    has_many :notifications, dependent: :destroy
 
     validates :road_name, presence: true
     validates :road_status, presence: true
@@ -28,4 +29,22 @@ class RoadCondition < ApplicationRecord
     def favorited_by?(user)
       favorites.exists?(user_id: user.id)
     end
+
+    def create_notification_like!(current_user)
+      #すでに「確認しました」をされているか検索
+      temp = Notification.where(["visiter_id = ? and visited_id = ? and road_condition_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
+      # 確認しましたされていない場合のみ、通知レコードを作成
+      if temp.blank?
+        notification = current_user.active_notifications.new(
+          road_condition_id: id,
+          visited_id: user_id,
+          action: 'like'
+        )
+        # 自分の投稿に対する確認しましたの場合は、通知済みとする
+        if notification.visiter_id == notification.visited_id
+          notification.checked = true
+        end
+        notification.save if notification.valid?
+      end
+    end 
 end
