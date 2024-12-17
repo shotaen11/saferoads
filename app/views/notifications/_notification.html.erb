@@ -13,30 +13,45 @@
 
     <% case notification.action %>
       <% when 'follow' %>
-        <%= "あなたをフォローしました" %>
+        <%= "あなたをフォローしました。" %>
+
       <% when 'favorite' %>
         <%= link_to notification.road_condition.road_name, notification.road_condition, style: "font-weight: bold;" %>
-        <%= "を確認しました" %>
+        <%= "を確認しました。" %>
+
       <% when 'comment' %>
-        <% if notification.road_condition.user_id == visited.id %>
-          <%= link_to notification.road_condition.road_name, notification.road_condition, style: "font-weight: bold;" %>
-        <% else %>
-          <span>
-            <%= link_to road_condition_path(notification.road_condition) do %>
-              <%= image_tag avatar_url(notification.road_condition.user).to_s, class: "icon_mini" %>
-              <strong><%= notification.road_condition.user.name + 'さんの報告' %></strong>
-            <% end %>
-          </span>
-        <% end %>
-        <%= "にコメントしました" %>
+        <span>
+          <%= link_to road_condition_path(notification.road_condition, anchor: "comment-#{notification.comment_id}") do %>
+            <strong>
+              <% if notification.road_condition.user_id == visited.id %>
+                <%= notification.road_condition.road_name %>
+              <% else %>
+                <%= notification.road_condition.user.name %>さんの報告
+              <% end %>
+            </strong>
+          <% end %>
+        </span>
+        <%= "にコメントしました。" %>
+
+      <% when 'comment_favorite' %>
+        <span>
+          <%= link_to road_condition_path(notification.road_condition, anchor: "comment-#{notification.comment_id}") do %>
+            <%= "あなたのコメント" %>
+          <% end %>
+          を確認しました。
+        </span>
     <% end %>
 
-    <p class="text-muted mb-0">
-      <%= Comment.find_by(id: notification.comment_id)&.comment %>
-    </p>
+    <!-- コメント内容 -->
+    <% if notification.comment_id.present? %>
+      <p class="text-muted mb-0">
+        <%= link_to Comment.find_by(id: notification.comment_id)&.comment, road_condition_path(notification.road_condition, anchor: "comment-#{notification.comment_id}"), style: "text-decoration: none;" %>
+      </p>
+    <% end %>
   </div>
 
-  <div class="small text-muted  text-end">
+  <!-- 通知の時間表示 -->
+  <div class="small text-muted text-end">
     <%= time_ago_in_words(notification.created_at).upcase %>前
   </div>
   <hr>

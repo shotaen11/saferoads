@@ -69,6 +69,7 @@ class User < ApplicationRecord
     CommentFavorite.exists?(user: self, comment: comment)
   end
 
+  #フォローの通知
   def create_notification_follow!(current_user)
     temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
     if temp.blank?
@@ -80,4 +81,32 @@ class User < ApplicationRecord
     end
   end
 
+  #コメント確認しましたの通知
+  def create_notification_comment_favorite!(current_user, comment_id)
+    comment = Comment.find_by(id: comment_id)
+    return if comment.nil?
+  
+    road_condition_id = comment.road_condition_id # コメントに関連する road_condition_id を取得
+  
+    # 既存通知の確認
+    temp = Notification.where(
+      visiter_id: current_user.id,
+      visited_id: id,
+      comment_id: comment_id,
+      road_condition_id: road_condition_id,
+      action: 'comment_favorite'
+    )
+    if temp.blank?
+      # 通知の作成
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        road_condition_id: road_condition_id, # ここで road_condition_id を渡す
+        comment_id: comment_id,
+        action: 'comment_favorite',
+        checked: false
+      )
+      notification.save if notification.valid?
+    end
+  end
+  
 end
