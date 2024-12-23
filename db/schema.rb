@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_17_023356) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_23_123923) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -40,8 +40,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_17_023356) do
   end
 
   create_table "notifications", force: :cascade do |t|
-    t.integer "road_condition_id", null: false
-    t.integer "visiter_id"
+    t.integer "road_condition_id"
+    t.integer "visitor_id"
     t.integer "visited_id"
     t.integer "comment_id"
     t.string "action"
@@ -49,6 +49,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_17_023356) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.index ["road_condition_id"], name: "index_notifications_on_road_condition_id"
   end
 

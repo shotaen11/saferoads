@@ -23,3 +23,6 @@ document.addEventListener("turbo:load", function () {
       document.body.classList.toggle("menu-open");
         });
       });
+
+
+      import "./follow";  // follow.jsをインポート

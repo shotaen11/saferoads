@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
       # 通知を作成する
       Notification.create!(
         user_id: @road_condition.user_id,  # 投稿者に通知
-        visiter_id: current_user.id,       # コメントしたユーザー
+        visitor_id: current_user.id,       # コメントしたユーザー
         road_condition_id: @road_condition.id,
         action: 'comment',                 # アクションをコメントとする
         comment_id: @comment.id           # コメントIDを通知に含める

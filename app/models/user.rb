@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :comment_favorites, dependent: :destroy
   
   #通知機能　active_notifications：自分からの通知　passive_notifications：相手からの通知
-  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visiter_id', dependent: :destroy
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
 
   # フォロー機能の関連付け
@@ -26,6 +26,8 @@ class User < ApplicationRecord
   # フォローする
   def follow(user_id)
     follower.create(followed_id: user_id)
+    user = User.find(user_id)
+    create_notification_follow!(user) # フォローした後に通知を作成
   end
 
   # フォローを外す
@@ -69,17 +71,25 @@ class User < ApplicationRecord
     CommentFavorite.exists?(user: self, comment: comment)
   end
 
-  #フォローの通知
-  def create_notification_follow!(current_user)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
-    if temp.blank?
-      notification = current_user.active_notifications.new(
-        visited_id: id,
-        action: 'follow'
-      )
-      notification.save if notification.valid?
-    end
+ # フォローの通知を作成
+ def create_notification_follow!(target_user)
+  # すでにフォロー通知が存在するか検索
+  existing_notification = Notification.find_by(visitor_id: self.id, visited_id: target_user.id, action: 'follow')
+
+  # ログを追加して確認
+  puts "Existing notification: #{existing_notification.inspect}"
+
+  # フォロー通知が存在しない場合のみ、通知レコードを作成
+  if existing_notification.blank?
+    notification = Notification.create(
+      visitor_id: self.id,         # フォローしたユーザーのID
+      visited_id: target_user.id,   # フォローされたユーザーのID
+      action: 'follow',             # アクションタイプを 'follow' に設定
+      follower_id: self.id,        # フォローした側のID（通知のフィールド）
+      followed_id: target_user.id  # フォローされた側のID（通知のフィールド）
+    )
   end
+end
 
   #コメント確認しましたの通知
   def create_notification_comment_favorite!(current_user, comment_id)
@@ -90,7 +100,7 @@ class User < ApplicationRecord
   
     # 既存通知の確認
     temp = Notification.where(
-      visiter_id: current_user.id,
+      visitor_id: current_user.id,
       visited_id: id,
       comment_id: comment_id,
       road_condition_id: road_condition_id,
