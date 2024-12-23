@@ -21,14 +21,31 @@ class ApplicationController < ActionController::Base
 
   def create_notification(road_condition:, visiter:, visited:, action:, comment: nil)
     return if visiter == visited # 自分に通知しない
-
-    Notification.create!(
-      road_condition: road_condition,
-      visiter: visiter,
-      visited: visited,
-      action: action,
-      comment: comment,
-      checked: false
-    )
+  
+    # 通常の通知とフォローの通知を区別
+    if action == 'follow'
+      Notification.create!(
+        road_condition: road_condition,
+        visiter: visiter,
+        visited: visited,
+        action: action,
+        comment: comment,
+        checked: false,
+        follower_id: visiter.id,   # フォローしたユーザーのID
+        followed_id: visited.id    # フォローされたユーザーのID
+      )
+    else
+      # フォロー以外の通知
+      Notification.create!(
+        road_condition: road_condition,
+        visiter: visiter,
+        visited: visited,
+        action: action,
+        comment: comment,
+        checked: false
+      )
+    end
   end
+  
+  
 end

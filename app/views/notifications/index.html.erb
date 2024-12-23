@@ -8,7 +8,8 @@
     <!-- 通知リスト -->
     <div class="container d-flex flex-column align-items-center">
       <ul class="list-group">
-      <% notifications = @notifications.where.not(visitor_id: current_user.id) %>
+        <% notifications = @notifications.where.not(visitor_id: current_user.id).order(created_at: :desc) %> <!-- 新着順に並べ替え -->
+        
         <!-- 自分の投稿に対する確認しました、コメントは通知に表示しない -->
         <% if notifications.exists? %>
           <%= render notifications %>
@@ -17,8 +18,7 @@
           <p>通知はありません</p>
         <% end %>
 
-    </ul>
-      </div>
+      </ul>
     </div>
   </div>
 </div>
