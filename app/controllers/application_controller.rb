@@ -21,14 +21,27 @@ class ApplicationController < ActionController::Base
 
   def create_notification(road_condition:, visiter:, visited:, action:, comment: nil)
     return if visiter == visited # 自分に通知しない
-
-    Notification.create!(
-      road_condition: road_condition,
-      visiter: visiter,
-      visited: visited,
-      action: action,
-      comment: comment,
-      checked: false
-    )
+  
+    if action == 'follow'
+      Notification.create!(
+        road_condition: road_condition,
+        visiter: visiter,
+        visited: visited,
+        action: 'follow', # フォローアクション
+        follower_id: visiter.id, # フォロワーID
+        followed_id: visited.id, # フォロワー先のID
+        checked: false
+      )
+    else
+      Notification.create!(
+        road_condition: road_condition,
+        visiter: visiter,
+        visited: visited,
+        action: action,
+        comment: comment,
+        checked: false
+      )
+    end
   end
+  
 end
