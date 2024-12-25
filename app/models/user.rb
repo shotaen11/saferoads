@@ -119,4 +119,7 @@ end
     end
   end
   
+  def unchecked_notifications_count
+    passive_notifications.unchecked.count
+  end
 end
