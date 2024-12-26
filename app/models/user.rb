@@ -120,7 +120,7 @@ end
   end
   
   def unchecked_notifications_count
-    passive_notifications.unchecked.or(passive_notifications.where(action: 'follow')).count
+    unchecked_count = passive_notifications.where(checked: false).or(passive_notifications.where(action: 'follow', checked: false)).count
   end
   
 end

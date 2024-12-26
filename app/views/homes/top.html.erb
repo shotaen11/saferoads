@@ -1,12 +1,14 @@
 <div class="cover-home">
   <div class="text-center">
-  <img src="<%= asset_path('SafeRoads.png') %>" alt="ロゴ">
+    <img src="<%= asset_path('SafeRoads.png') %>" alt="ロゴ" class="logo-top">
     <p class="sub-title">- for Civil Engineers -</p>
-    <%= link_to new_user_registration_path do %>
-      <h2 class="btn btn-primary mr-2">新規登録</h2>
-    <% end %>
-    <%= link_to new_user_session_path do %>
-      <h2 class="btn btn-success ml-2">ログイン</h2>
-    <% end %>
+    <div class="button-group">
+      <%= link_to new_user_registration_path do %>
+        <h2 class="btn btn-primary mr-2">新規登録</h2>
+      <% end %>
+      <%= link_to new_user_session_path do %>
+        <h2 class="btn btn-success ml-2">ログイン</h2>
+      <% end %>
+    </div>
   </div>
 </div>
