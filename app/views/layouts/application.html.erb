@@ -28,7 +28,8 @@
           <div>
             <%= link_to notifications_path, class: "text-white nav-link" do %>
             <img src="<%= asset_path('icon.png') %>" alt="通知アイコン"  class="notification-icon" >
-            (<%= current_user.passive_notifications&.unchecked&.count || 0 %>)
+            <!-- (<%= current_user.passive_notifications&.unchecked&.count || 0 %>) -->
+            (<%= current_user.passive_notifications.where(checked: false).count %>)
             <% end %>
           </div>
           <div><%= link_to "報告一覧", road_conditions_path, class: "text-white nav-link" %></div>

@@ -71,51 +71,23 @@ class User < ApplicationRecord
     CommentFavorite.exists?(user: self, comment: comment)
   end
 
- # フォローの通知を作成
- def create_notification_follow!(target_user)
-  # すでにフォロー通知が存在するか検索
-  existing_notification = Notification.find_by(visitor_id: self.id, visited_id: target_user.id, action: 'follow')
-
-  # ログを追加して確認
-  puts "Existing notification: #{existing_notification.inspect}"
-
-  # フォロー通知が存在しない場合のみ、通知レコードを作成
-  if existing_notification.blank?
-    notification = Notification.create(
-      visitor_id: self.id,         # フォローしたユーザーのID
-      visited_id: target_user.id,   # フォローされたユーザーのID
-      action: 'follow',             # アクションタイプを 'follow' に設定
-      follower_id: self.id,        # フォローした側のID（通知のフィールド）
-      followed_id: target_user.id  # フォローされた側のID（通知のフィールド）
+  # フォローの通知を作成
+  def create_notification_follow!(target_user)
+    # すでにフォロー通知が存在するか検索
+    existing_notification = Notification.find_by(
+      visitor_id: self.id,
+      visited_id: target_user.id,
+      action: 'follow'
     )
-  end
-end
 
-  #コメント確認しましたの通知
-  def create_notification_comment_favorite!(current_user, comment_id)
-    comment = Comment.find_by(id: comment_id)
-    return if comment.nil?
-  
-    road_condition_id = comment.road_condition_id # コメントに関連する road_condition_id を取得
-  
-    # 既存通知の確認
-    temp = Notification.where(
-      visitor_id: current_user.id,
-      visited_id: id,
-      comment_id: comment_id,
-      road_condition_id: road_condition_id,
-      action: 'comment_favorite'
-    )
-    if temp.blank?
-      # 通知の作成
-      notification = current_user.active_notifications.new(
-        visited_id: id,
-        road_condition_id: road_condition_id, # ここで road_condition_id を渡す
-        comment_id: comment_id,
-        action: 'comment_favorite',
-        checked: false
+    # フォロー通知が存在しない場合のみ作成
+    if existing_notification.blank?
+      Notification.create(
+        visitor_id: self.id,         # フォローしたユーザーのID
+        visited_id: target_user.id,  # フォローされたユーザーのID
+        action: 'follow',            # アクションタイプを 'follow' に設定
+        checked: false               # 未確認の状態
       )
-      notification.save if notification.valid?
     end
   end
   
@@ -123,4 +95,17 @@ end
     unchecked_count = passive_notifications.where(checked: false).or(passive_notifications.where(action: 'follow', checked: false)).count
   end
   
+  # コメントにお気に入りが追加されたときに通知を作成
+  def create_notification_comment_favorite!(current_user, comment_id)
+    notification = self.active_notifications.build(  # notifications → active_notifications に変更
+      visitor_id: current_user.id,
+      visited_id: self.id,
+      action: 'comment_favorite',
+      checked: false,
+      comment_id: comment_id,
+      user_id: current_user.id
+    )
+    notification.save!
+  end
+
 end

@@ -1,5 +1,5 @@
-<% visitor = notification.visitor %>
-<% visited = notification.visited %>
+<% visitor = notification.visitor %>  <!-- 通知を送ったユーザー -->
+<% visited = notification.visited %>  <!-- 通知を受け取ったユーザー -->
 
 <div class="col-md-10 mx-auto">
   <div class="form-inline">
@@ -38,13 +38,19 @@
         <%= "にコメントしました。" %>
 
       <% when 'comment_favorite' then %>
-        <span>
-          <%= link_to road_condition_path(notification.road_condition, anchor: "comment-#{notification.comment_id}") do %>
-            <%= "あなたのコメント" %>
-          <% end %>
-          を確認しました。
-        </span>
-    <% end %>
+  <% if notification.comment_id.present? %>
+    <span>
+      <%= link_to road_condition_path(notification.road_condition, anchor: "comment-#{notification.comment_id}") do %>
+        <%= "あなたのコメント" %>
+      <% end %>
+      を確認しました。
+    </span>
+  <% else %>
+    <span>コメントが削除されたか、無効な通知です。</span>
+  <% end %>
+<% end %>
+
+
 
     <!-- コメント内容 -->
     <% if notification.comment_id.present? %>
