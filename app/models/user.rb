@@ -71,25 +71,30 @@ class User < ApplicationRecord
     CommentFavorite.exists?(user: self, comment: comment)
   end
 
-  # フォローの通知を作成
-  def create_notification_follow!(target_user)
-    # すでにフォロー通知が存在するか検索
-    existing_notification = Notification.find_by(
-      visitor_id: self.id,
-      visited_id: target_user.id,
-      action: 'follow'
-    )
+# フォローの通知を作成
+def create_notification_follow!(target_user)
+  # 自分を通知対象にしないようにする
+  return if self == target_user  # 自分をフォローした場合は通知しない
 
-    # フォロー通知が存在しない場合のみ作成
-    if existing_notification.blank?
-      Notification.create(
-        visitor_id: self.id,         # フォローしたユーザーのID
-        visited_id: target_user.id,  # フォローされたユーザーのID
-        action: 'follow',            # アクションタイプを 'follow' に設定
-        checked: false               # 未確認の状態
-      )
-    end
+  # すでにフォロー通知が存在するか検索
+  existing_notification = Notification.find_by(
+    visitor_id: target_user.id,  # フォローしたユーザー（user2）のID
+    visited_id: self.id,          # フォローされたユーザー（user1）のID
+    action: 'follow'
+  )
+
+  # フォロー通知が存在しない場合のみ作成
+  if existing_notification.blank?
+    Notification.create(
+      visitor_id: target_user.id,  # フォローしたユーザー（user2）のID
+      visited_id: self.id,          # フォローされたユーザー（user1）のID
+      action: 'follow',             # アクションタイプを 'follow' に設定
+      checked: false                # 未確認の状態
+    )
   end
+end
+
+
   
   def unchecked_notifications_count
     unchecked_count = passive_notifications.where(checked: false).or(passive_notifications.where(action: 'follow', checked: false)).count
