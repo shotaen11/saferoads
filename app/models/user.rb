@@ -26,8 +26,6 @@ class User < ApplicationRecord
   # フォローする
   def follow(user_id)
     follower.create(followed_id: user_id)
-    user = User.find(user_id)
-    create_notification_follow!(user) # フォローした後に通知を作成
   end
 
   # フォローを外す
@@ -72,29 +70,16 @@ class User < ApplicationRecord
   end
 
 # フォローの通知を作成
-def create_notification_follow!(target_user)
-  # 自分を通知対象にしないようにする
-  return if self == target_user  # 自分をフォローした場合は通知しない
+def create_notification_follow!(current_user)
+  temp = Notification.where(['visitor_id = ? and visited_id = ? and action = ? ', current_user.id, id, 'follow'])
+  return if temp.present?
 
-  # すでにフォロー通知が存在するか検索
-  existing_notification = Notification.find_by(
-    visitor_id: target_user.id,  # フォローしたユーザー（user2）のID
-    visited_id: self.id,          # フォローされたユーザー（user1）のID
+  notification = current_user.active_notifications.new(
+    visited_id: id,
     action: 'follow'
   )
-
-  # フォロー通知が存在しない場合のみ作成
-  if existing_notification.blank?
-    Notification.create(
-      visitor_id: target_user.id,  # フォローしたユーザー（user2）のID
-      visited_id: self.id,          # フォローされたユーザー（user1）のID
-      action: 'follow',             # アクションタイプを 'follow' に設定
-      checked: false                # 未確認の状態
-    )
-  end
+  notification.save if notification.valid?
 end
-
-
   
   def unchecked_notifications_count
     unchecked_count = passive_notifications.where(checked: false).or(passive_notifications.where(action: 'follow', checked: false)).count
