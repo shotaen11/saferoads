@@ -7,11 +7,11 @@ class CommentsController < ApplicationController
     if @comment.save
       # 通知を作成する
       Notification.create!(
-        user_id: @road_condition.user_id,  # 投稿者に通知
-        visitor_id: current_user.id,       # コメントしたユーザー
+        visited_id: @road_condition.user_id,  # 投稿者に通知
+        visitor_id: current_user.id,          # コメントしたユーザー
         road_condition_id: @road_condition.id,
-        action: 'comment',                 # アクションをコメントとする
-        comment_id: @comment.id           # コメントIDを通知に含める
+        action: 'comment',                    # アクションをコメントとする
+        comment_id: @comment.id               # コメントIDを通知に含める
       )
       redirect_to road_condition_path(@road_condition)
     else
@@ -19,7 +19,6 @@ class CommentsController < ApplicationController
       render 'road_conditions/show', status: :unprocessable_entity
     end
   end
-  
 
   # コメントを削除する
   def destroy

@@ -8,10 +8,11 @@
   text-align: center;
 }
 
-.logo {
-  width: 100%;
-  max-width: 300px; /* 画像の最大幅を制限 */
+.logo-top {
+  width: auto;
+  max-width: 300px;
   height: auto;
+  margin: 0 auto;
 }
 
 .sub-title {
@@ -22,9 +23,9 @@
 
 .button-group {
   display: flex;
-  flex-wrap: wrap; /* ボタンが小さな画面で折り返されるように設定 */
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 10px; /* ボタン間のスペース */
+  gap: 10px;
 }
 
 .btn {
@@ -32,17 +33,26 @@
   padding: 10px 20px;
 }
 
+/* メディアクエリ */
 @media (max-width: 768px) {
+  .cover-home {
+    padding: 20px; /* 高さの調整が必要な場合に対応 */
+  }
+
+  .logo-top {
+    max-width: 200px; /* 小さい画面での最大幅 */
+  }
+
   .sub-title {
-    font-size: 1rem; /* タイトルを縮小 */
+    font-size: 1rem;
   }
 
   .btn {
-    font-size: 0.9rem; /* ボタンの文字サイズを縮小 */
+    font-size: 0.9rem;
     padding: 8px 16px;
   }
 
   .button-group {
-    flex-direction: column; /* 小さい画面ではボタンを縦に並べる */
+    flex-direction: column; /* 縦並びに変更 */
   }
 }
