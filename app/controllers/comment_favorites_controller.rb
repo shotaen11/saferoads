@@ -16,12 +16,17 @@ class CommentFavoritesController < ApplicationController
       comment_id: @comment.id        # コメントIDを通知に含める
     )
 
-
-    redirect_to road_condition_path(@road_condition)
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   def destroy
     @comment = Comment.find(params[:comment_id])
     current_user.unfavorite_comment(@comment)
+
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 end

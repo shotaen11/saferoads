@@ -20,11 +20,14 @@
     <!-- 報告詳細部分 -->
     <div class="row mt-4 w-100">
       <div class="col-md-12">
-        <!-- 報告者 -->
-        <div class="col-md-12 mb-3 d-flex">
-          <p class="caption mb-0">報告者　：</p>
-          <p class="caption ml-2 mb-0"><%= @road_condition.user.present? ? @road_condition.user.name : "No-Name" %></p>
-        </div>
+      <!-- 報告者 -->
+      <div class="col-md-12 mb-3 d-flex">
+        <p class="caption mb-0">報告者　：</p>
+        <p class="caption ml-2 mb-0">
+          <!-- ユーザーが存在する場合、プロフィールリンクを作成 -->
+          <%= link_to @road_condition.user.present? ? @road_condition.user.name : "No-Name", user_path(@road_condition.user) %>
+        </p>
+      </div>      
 
         <!-- 路線名 -->
         <div class="col-md-12 mb-3 d-flex">
@@ -131,9 +134,13 @@
             <!-- ヘッダー部分 -->
             <div class="d-flex align-items-center">
               <p class="caption ml-3"><strong>No.<%= @comments.count - index %></strong></p>
-              <p class="caption ml-3"><strong><%= comment.user.name %></strong></p>
+              <!-- ユーザー名をリンクにして、ユーザーのプロフィールページに飛べるようにする -->
+              <p class="caption ml-3">
+                <%= link_to comment.user.name, user_path(comment.user), class: "strong" %>
+              </p>
               <p class="text-muted mt-3"><%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
             </div>
+          
         
             <!-- コメント内容 -->
             <p class="comments mb-2"><%= comment.comment %></p>

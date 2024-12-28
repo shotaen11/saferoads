@@ -3,6 +3,7 @@
 
 <div class="col-md-10 mx-auto">
   <div class="form-inline">
+    <!-- 通知を送ったユーザーの名前をリンクとして表示 -->
     <span>
       <%= link_to user_path(visitor) do %>
         <strong><%= visitor.name %></strong>
@@ -10,54 +11,66 @@
       さんが
     </span>
 
+    <!-- 通知の種類によって表示内容を分岐 -->
     <% case notification.action %>
       <% when 'follow' then %>
+        <!-- フォロー通知の場合 -->
         あなたをフォローしました。  
 
       <% when 'favorite' then %>
+        <!-- お気に入り（road_condition）の場合 -->
         <% if notification.road_condition.present? %>
+          <!-- road_conditionが存在する場合はリンクを表示 -->
           <%= link_to road_condition_path(notification.road_condition) do %>
             <strong>
               <%= notification.road_condition.road_name %>
             </strong>
           <% end %>
         <% else %>
+          <!-- road_conditionが無効な場合のエラーメッセージ -->
           <span>報告が削除されたか、無効な通知です。</span>
         <% end %>
         を確認しました。
 
       <% when 'comment' then %>
+        <!-- コメント通知の場合 -->
         <span>
           <% if notification.road_condition.present? %>
+            <!-- road_conditionが存在する場合、コメントをリンクにして表示 -->
             <%= link_to road_condition_path(notification.road_condition, anchor: "comment-#{notification.comment_id}") do %>
               <strong>
                 <% if notification.road_condition.user_id == visited.id %>
+                  <!-- 報告者が通知を受け取ったユーザーと同じ場合 -->
                   <%= notification.road_condition.road_name %>
                 <% else %>
+                  <!-- 報告者が異なる場合 -->
                   <%= notification.road_condition.user.name %>さんの報告
                 <% end %>
               </strong>
             <% end %>
           <% else %>
+            <!-- road_conditionが無効な場合のエラーメッセージ -->
             <span>報告が削除されたか、無効な通知です。</span>
           <% end %>
         </span>
         <%= "にコメントしました。" %>
 
-<% when 'comment_favorite' then %>
-  <% if notification.comment_id.present? && notification.road_condition.present? %>
-    <span>
-      <%= link_to road_condition_path(notification.road_condition, anchor: "comment-#{notification.comment_id}") do %>
-        <%= "あなたのコメント" %>
-      <% end %>
-      を確認しました。
-    </span>
-  <% else %>
-    <span>コメントが削除されたか、無効な通知です。</span>
-  <% end %>
-  <% end %>
+      <% when 'comment_favorite' then %>
+        <!-- コメントのお気に入り通知の場合 -->
+        <% if notification.comment_id.present? && notification.road_condition.present? %>
+          <span>
+            <%= link_to road_condition_path(notification.road_condition, anchor: "comment-#{notification.comment_id}") do %>
+              <%= "あなたのコメント" %>
+            <% end %>
+            を確認しました。
+          </span>
+        <% else %>
+          <!-- コメントが削除された場合のエラーメッセージ -->
+          <span>コメントが削除されたか、無効な通知です。</span>
+        <% end %>
+    <% end %>
 
-    <!-- コメント内容 -->
+    <!-- コメント内容が存在する場合、その内容を表示 -->
     <% if notification.comment_id.present? %>
       <p class="text-muted mb-0">
         <%= link_to Comment.find_by(id: notification.comment_id)&.comment, road_condition_path(notification.road_condition, anchor: "comment-#{notification.comment_id}"), style: "text-decoration: none;" %>
@@ -65,7 +78,7 @@
     <% end %>
   </div>
 
-  <!-- 通知の時間表示 -->
+  <!-- 通知の時間表示。通知が送信されてからの経過時間を表示 -->
   <div class="small text-muted text-end">
     <%= time_ago_in_words(notification.created_at).upcase %>前
   </div>
