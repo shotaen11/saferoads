@@ -6,7 +6,7 @@ class FavoritesController < ApplicationController
       current_user.favorite(@road_condition)
   
       # 通知を作成
-      @road_condition.create_notification_like!(current_user)
+      @road_condition.create_notification_favorite!(current_user)
 
       respond_to do |format|
         format.turbo_stream

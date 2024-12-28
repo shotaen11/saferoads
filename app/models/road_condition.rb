@@ -30,7 +30,7 @@ class RoadCondition < ApplicationRecord
       favorites.exists?(user_id: user.id)
     end
 
-    def create_notification_like!(current_user)
+    def create_notification_favorite!(current_user)
       #すでに「確認しました」をされているか検索
       temp = Notification.where(["visitor_id = ? and visited_id = ? and road_condition_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
       # 確認しましたされていない場合のみ、通知レコードを作成
@@ -38,7 +38,7 @@ class RoadCondition < ApplicationRecord
         notification = current_user.active_notifications.new(
           road_condition_id: id,
           visited_id: user_id,
-          action: 'like'
+          action: 'favorite'
         )
         # 自分の投稿に対する確認しましたの場合は、通知済みとする
         if notification.visitor_id == notification.visited_id

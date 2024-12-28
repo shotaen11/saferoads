@@ -6,8 +6,18 @@ class CommentFavoritesController < ApplicationController
     @road_condition = @comment.road_condition # コメントに関連するRoadConditionを取得
 
     current_user.favorite_comment(@comment)
-    # 通知の作成
-    @comment.user.create_notification_comment_favorite!(current_user, @comment.id)
+
+    # 通知を作成する
+    Notification.create!(
+      visited_id: @comment.user_id,  # コメントの投稿者に通知
+      visitor_id: current_user.id,   # いいねをしたユーザー
+      road_condition_id: @road_condition.id,
+      action: 'comment_favorite',    # アクションをcomment_favoriteとする
+      comment_id: @comment.id        # コメントIDを通知に含める
+    )
+
+
+    redirect_to road_condition_path(@road_condition)
   end
 
   def destroy

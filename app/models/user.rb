@@ -85,17 +85,5 @@ end
     unchecked_count = passive_notifications.where(checked: false).or(passive_notifications.where(action: 'follow', checked: false)).count
   end
   
-  # コメントにお気に入りが追加されたときに通知を作成
-  def create_notification_comment_favorite!(current_user, comment_id)
-    notification = self.active_notifications.build(  # notifications → active_notifications に変更
-      visitor_id: current_user.id,
-      visited_id: self.id,
-      action: 'comment_favorite',
-      checked: false,
-      comment_id: comment_id,
-      user_id: current_user.id
-    )
-    notification.save!
-  end
 
 end
