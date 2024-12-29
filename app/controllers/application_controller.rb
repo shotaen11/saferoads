@@ -19,27 +19,32 @@ class ApplicationController < ActionController::Base
     road_conditions_path
   end
 
+  # 通知を作成するメソッド
+  # フォローアクションなどに応じて通知を生成
   def create_notification(road_condition:, visiter:, visited:, action:, comment: nil)
-    return if visiter == visited # 自分に通知しない
-  
+    # 自分に通知しない
+    return if visiter == visited 
+
+    # フォローアクションの場合
     if action == 'follow'
       Notification.create!(
-        road_condition: road_condition,
-        visiter: visiter,
-        visited: visited,
-        action: 'follow', # フォローアクション
-        follower_id: visiter.id, # フォロワーID
-        followed_id: visited.id, # フォロワー先のID
-        checked: false
+        road_condition: road_condition, # 通知対象の道路状態
+        visiter: visiter,               # 通知を送るユーザー（訪問者）
+        visited: visited,               # 通知を受け取るユーザー（訪問先）
+        action: 'follow',               # アクションタイプ（フォロー）
+        follower_id: visiter.id,        # フォロワーID
+        followed_id: visited.id,        # フォローされるID
+        checked: false                  # 通知が未確認
       )
     else
+      # フォロー以外のアクションの場合
       Notification.create!(
-        road_condition: road_condition,
-        visiter: visiter,
-        visited: visited,
-        action: action,
-        comment: comment,
-        checked: false
+        road_condition: road_condition, # 通知対象の道路状態
+        visiter: visiter,               # 通知を送るユーザー（訪問者）
+        visited: visited,               # 通知を受け取るユーザー（訪問先）
+        action: action,                 # アクションタイプ（例: コメント）
+        comment: comment,               # コメント内容（任意）
+        checked: false                  # 通知が未確認
       )
     end
   end
