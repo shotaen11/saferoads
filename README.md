@@ -33,8 +33,33 @@
 - 現場職員と情報収集班間のリアルタイム情報共有
 
 ## 利用方法
+ 1. **ログイン**：ユーザー名とパスワードを入力し、ログインします。
+ 2. **報告一覧**：通行規制状況を確認します。
+ 3. **報告投稿**：新たなトラブル情報を投稿します。
+ 4. **コメント**：報告に対してコメントを投稿します。
 
 ## 機能一覧
+- ユーザー認証機能
+- 通行規制状況の表示
+- 道のトラブルの報告と管理
+- ユーザー管理機能
 
 ## 開発環境
-
+- OS: macOS
+- 使用言語: Ruby, JavaScript
+- フレームワーク:  Ruby on Rails 7.1.4
+- ライブラリ: Bootstrap, jQuery
+- データベース: SQLite3
+- フロントエンド:
+  - Bootstrap 5.3.0
+  - jQuery (jquery-rails)
+  - Sass (sassc-rails)
+- 主なGem:
+  - `devise`: 認証機能
+  - `kaminari`: ページネーション
+  - `enum_help`: enumの翻訳補助
+  - `turbo-rails`: Hotwireによる高速ページ遷移
+  - `stimulus-rails`: モダンなJavaScriptフレームワーク
+  - `refile`: ファイルアップロード
+  - `refile-mini_magick`: 画像処理
+- エディタ: Visual Studio Code
