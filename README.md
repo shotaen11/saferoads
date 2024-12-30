@@ -35,12 +35,13 @@
 ## 利用方法
  1. **新規登録・ログイン**：ユーザー新規登録を行う、またはログインします。
 <img width="1680" alt="スクリーンショット 2024-12-30 17 32 03" src="https://github.com/user-attachments/assets/fa6a4517-0a61-485d-8626-4fc374e9d6cd" />
+<img width="1680" alt="スクリーンショット 2024-12-30 17 32 36" src="https://github.com/user-attachments/assets/b501295a-c4b0-4f08-9fc2-3b81d8177e96" />
 
  2. **報告一覧**：通行規制状況の一覧が確認できます。
- <img width="1680" alt="スクリーンショット 2024-12-30 17 32 36" src="https://github.com/user-attachments/assets/b501295a-c4b0-4f08-9fc2-3b81d8177e96" />
+ <img width="1680" alt="スクリーンショット 2024-12-30 17 33 05" src="https://github.com/user-attachments/assets/218b2634-43b2-4d70-adcc-236dbcf550d4" />
 
  3. **報告投稿**：新たなトラブル情報を投稿します。
- <img width="1680" alt="スクリーンショット 2024-12-30 17 33 05" src="https://github.com/user-attachments/assets/218b2634-43b2-4d70-adcc-236dbcf550d4" />
+<img width="1678" alt="スクリーンショット 2024-12-30 17 33 52" src="https://github.com/user-attachments/assets/5d62c329-0ed8-4a19-b00c-9c3dd3cd245a" />
 
  4. **報告詳細**：特定の報告の詳細を確認できます。
  <img width="1680" alt="スクリーンショット 2024-12-30 17 34 34" src="https://github.com/user-attachments/assets/df3d9cb5-1efb-407d-a369-2cb561f068c3" />
