@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_12_27_031600) do
+ActiveRecord::Schema[7.1].define(version: 2024_12_27_115305) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -51,6 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_27_031600) do
     t.integer "user_id"
     t.integer "follower_id"
     t.integer "followed_id"
+    t.integer "comment_favorite_id"
     t.index ["road_condition_id"], name: "index_notifications_on_road_condition_id"
   end
 
