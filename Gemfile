@@ -90,3 +90,7 @@ gem 'kaminari'
 gem 'enum_help'
 
 gem 'devise-i18n'
+
+gem 'nokogiri'
+
+gem 'sprockets-rails'
