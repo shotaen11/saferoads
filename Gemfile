@@ -3,7 +3,7 @@ source "https://rubygems.org"
 ruby "3.1.2"
 
 gem "rails", "~> 7.1.4"
-gem "sprockets-rails"
+
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
@@ -42,4 +42,3 @@ gem 'devise'
 gem 'kaminari'
 gem 'enum_help'
 gem 'devise-i18n'
-gem 'nokogiri'
