@@ -375,7 +375,7 @@ DEPENDENCIES
   kaminari
   pg
   puma (>= 5.0)
-  rails (~> 7.1.4)
+  rails (~> 7.1.5)
   refile!
   refile-mini_magick
   sassc-rails
