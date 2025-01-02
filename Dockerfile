@@ -20,8 +20,8 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libvips pkg-config libpq-dev nodejs
 
 # Update RubyGems and install the required version of Bundler
-RUN gem update --system && \
-    gem install bundler -v 2.5.21
+RUN gem update --system --no-document && \
+    gem install bundler --no-document -v 2.5.21
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
