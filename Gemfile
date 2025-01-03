@@ -92,4 +92,4 @@ gem 'enum_help'
 
 gem 'devise-i18n'
 
-gem 'nokogiri'
+gem 'nokogiri', '>= 1.13.0', '< 2.0.0', platforms: :ruby, require: false

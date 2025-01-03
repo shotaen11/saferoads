@@ -60,3 +60,5 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD ["./bin/rails", "server"]
+
+RUN apt-get update -qq && apt-get install -y libxml2-dev libxslt-dev
