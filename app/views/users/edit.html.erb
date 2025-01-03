@@ -15,8 +15,8 @@
           <label class="form-label">プロフィール画像</label><br>
           <%= attachment_image_tag @user, :profile_image, size: '100x100', fallback: "no_image.svg", class: "mb-3 profile-img" %><br>
           <%= f.file_field :profile_image %><br>
-
-          <% if @user.profile_image.attached? %>  <!-- 画像が添付されている場合に表示 -->
+          <% if @user.profile_image.present? && @user.profile_image.attached? %>
+          <!-- 画像が添付されている場合に表示 -->
             <%= link_to '画像を削除', remove_profile_image_user_path(@user), method: :delete, data: { confirm: '本当に画像を削除しますか？' }, class: "btn btn-danger mt-2" %>
           <% end %>
         </div>
