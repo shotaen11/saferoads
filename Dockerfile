@@ -15,9 +15,17 @@ ENV RAILS_ENV="production" \
 # Throw-away build stage to reduce size of final image
 FROM base as build
 
-# Install packages needed to build gems
+# Install packages needed to build gems (include Nokogiri dependencies)
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libvips pkg-config libpq-dev nodejs
+    apt-get install --no-install-recommends -y \
+        build-essential \
+        git \
+        libvips \
+        pkg-config \
+        libpq-dev \
+        nodejs \
+        libxml2-dev \
+        libxslt-dev
 
 # Update RubyGems and install the required version of Bundler
 RUN gem update --system --no-document && \
@@ -42,7 +50,11 @@ FROM base
 
 # Install packages needed for deployment
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips libpq-dev && \
+    apt-get install --no-install-recommends -y \
+        curl \
+        libsqlite3-0 \
+        libvips \
+        libpq-dev && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
 # Copy built artifacts: gems, application
@@ -60,5 +72,3 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
 CMD ["./bin/rails", "server"]
-
-RUN apt-get update -qq && apt-get install -y libxml2-dev libxslt-dev
