@@ -44,9 +44,8 @@
 <img width="1678" alt="スクリーンショット 2024-12-30 17 33 52" src="https://github.com/user-attachments/assets/5d62c329-0ed8-4a19-b00c-9c3dd3cd245a" />
 
  4. **報告詳細**：特定の報告の詳細を確認できます。
- <img width="1680" alt="スクリーンショット 2024-12-30 17 34 34" src="https://github.com/user-attachments/assets/df3d9cb5-1efb-407d-a369-2cb561f068c3" />
-
  5. **コメント**：報告に対してコメントを投稿します。
+ <img width="1680" alt="スクリーンショット 2024-12-30 17 34 34" src="https://github.com/user-attachments/assets/df3d9cb5-1efb-407d-a369-2cb561f068c3" />
 <img width="1680" alt="スクリーンショット 2024-12-30 17 34 49" src="https://github.com/user-attachments/assets/e1560c52-d381-4195-a177-b8d1435d8492" />
 
 ## 機能一覧
