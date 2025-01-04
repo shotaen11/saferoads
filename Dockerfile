@@ -25,7 +25,7 @@ RUN apt-get update -qq && \
         zlib1g-dev
 
 RUN gem update --system --no-document && \
-    gem install bundler --no-document -v 2.5.21
+    gem install bundler --no-document
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
