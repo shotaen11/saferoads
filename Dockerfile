@@ -8,16 +8,7 @@ ENV RAILS_ENV="production" \
     BUNDLE_WITHOUT="development"
 FROM base as build
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y \
-        build-essential \
-        git \
-        libvips \
-        pkg-config \
-        libpq-dev \
-        nodejs \
-        libxml2-dev \
-        libxslt-dev \
-        zlib1g-dev
+    apt-get install --no-install-recommends -y build-essential git libvips pkg-config libpq-dev nodejs
 RUN gem update --system --no-document && \
     gem install bundler --no-document
 COPY Gemfile Gemfile.lock ./
@@ -28,11 +19,7 @@ RUN bundle exec bootsnap precompile app/ lib/
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 FROM base
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y \
-        curl \
-        libsqlite3-0 \
-        libvips \
-        libpq-dev && \
+    apt-get install --no-install-recommends -y curl libsqlite3-0 libvips libpq5 nodejs && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
