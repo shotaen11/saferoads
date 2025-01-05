@@ -1,12 +1,12 @@
 databases:
-  - name: saferoads
-    databaseName: saferoads
+  - name: saferoads_project
+    databaseName: saferoads_db
     user: saferoads_user
     region: Oregon
 
 services:
   - type: web
-    name: saferoads
+    name: saferoads_project
     env: ruby
     region: Oregon
     plan: free
@@ -16,7 +16,7 @@ services:
     envVars:
       - key: DATABASE_URL
         fromDatabase:
-          name: saferoads
+          name: saferoads_project
           property: connectionString
       - key: RAILS_MASTER_KEY
         sync: false
