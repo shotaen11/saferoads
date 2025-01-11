@@ -92,3 +92,4 @@ gem 'enum_help'
 
 gem 'devise-i18n'
 
+gem 'bundler', '2.6.2'

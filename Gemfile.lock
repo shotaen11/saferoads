@@ -337,6 +337,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   bootstrap (~> 5.3.0)
+  bundler (= 2.6.2)
   capybara
   debug
   devise
