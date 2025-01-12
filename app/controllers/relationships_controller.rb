@@ -11,6 +11,7 @@ class RelationshipsController < ApplicationController
   
   # フォロー解除処理を行うアクション
   def destroy
+    @user = User.find(params[:user_id])
     current_user.unfollow(params[:user_id])     # 現在のログインユーザーが対象ユーザーのフォローを解除
 
     # フォロー解除後、元のページにリダイレクト（リファラを参照）

@@ -5,6 +5,8 @@ import "bootstrap"
 import "@hotwired/turbo-rails"
 import "controllers"
 import { Turbo } from "@hotwired/turbo-rails";
+import Rails from "@rails/ujs";  // Rails-ujsをインポート
+Rails.start();  // 初期化
 
 
 // ハンバーガーメニューをクリックしたときにナビゲーションを表示/非表示にする

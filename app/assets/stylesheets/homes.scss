@@ -5,7 +5,9 @@
   align-items: center;
   height: 100vh;
   background-image: image-url("top.jpg");
-  background-color: #f8f9fa;
+  background-color:rgba(255,255,255,0.4);
+  background-blend-mode:lighten;
+  background-size: 100% 100%;
   text-align: center;
 }
 
@@ -17,8 +19,16 @@
 }
 
 .sub-title {
+  font-family: serif;
   font-size: 1.2rem;
-  color: #6c757d;
+  color: #000000;
+  margin: 10px 0;
+}
+
+.title {
+  font-family: serif;
+  font-size: 1.2rem;
+  color: #000000;
   margin: 10px 0;
 }
 
