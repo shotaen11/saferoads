@@ -26,7 +26,7 @@ class RoadConditionsController < ApplicationController
     # 検索条件を動的に追加（検索キーワードがあれば）
     if params[:search].present?
       @road_conditions = @road_conditions.where(
-        'road_name LIKE :search OR road_status LIKE :search OR description LIKE :search OR category_id LIKE :search',
+        'road_name LIKE :search OR road_status LIKE :search OR description LIKE :search OR category_id = :search',
         search: "%#{params[:search]}%"
       )
     else
