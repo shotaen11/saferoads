@@ -6,5 +6,5 @@ import "bootstrap"
 import "@hotwired/turbo-rails"
 import "controllers"
 // app/javascript/application.js
-import "./hamburger_menu";
+import '../hamburger_menu';
 
