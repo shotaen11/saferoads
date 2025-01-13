@@ -22,13 +22,23 @@ class RoadConditionsController < ApplicationController
   def index
     # 公開された報告をページネーションと共に取得
     @road_conditions = RoadCondition.published.page(params[:page]).reverse_order
-    
+  
     # 検索条件を動的に追加（検索キーワードがあれば）
     if params[:search].present?
-      @road_conditions = @road_conditions.where(
-        'road_name LIKE :search OR road_status LIKE :search OR description LIKE :search OR category_id = :search',
-        search: "%#{params[:search]}%"
-      )
+     search_term = params[:search]
+    
+      # 数字が入力された場合はcategory_idを検索
+      if search_term.match?(/\A\d+\z/) # 数字だけの場合
+       @road_conditions = @road_conditions.where(
+          'category_id = ?', search_term.to_i
+        )
+      else
+        # それ以外は文字列としてLIKE検索
+        @road_conditions = @road_conditions.where(
+          'road_name LIKE :search OR road_status LIKE :search OR description LIKE :search',
+         search: "%#{search_term}%"
+        )
+      end
     else
       flash.now[:alert] = 'キーワードを入力してください。'  # 検索キーワードが入力されていない場合の警告
     end
