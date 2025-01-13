@@ -74,7 +74,7 @@
         <!-- 添付画像 -->
         <div class="text-center mb-4">
           <% if @road_condition.image.present? %>
-            <%= image_tag attachment_url(@road_condition, :image), size: "600x600", class: "img-fluid" %>
+            <%= image_tag @road_condition.image_url, size: "600x600", class: "img-fluid" %>
           <% else %>
             <%= image_tag 'no_photo.png', size: "600x600", class: "img-fluid" %>
           <% end %>
