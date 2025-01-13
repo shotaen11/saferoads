@@ -59,6 +59,13 @@
   font-size: 0.9rem;
 }
 
+.right-align {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0; /* 余白をなくして、余計な影響を防ぐ */
+}
+
 /* プロフィール */
 .profile {
   padding: 15px;
