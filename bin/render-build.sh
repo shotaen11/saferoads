@@ -7,5 +7,4 @@ bundle install
 bundle exec rails assets:precompile
 # 以下追加
 bundle exec rake assets:clean
-#bundle exec rails db:migrat
-DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:migrate:reset
+bundle exec rake db:migrate
