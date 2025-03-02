@@ -1,6 +1,6 @@
 databases:
   - name: saferoads_project
-    databaseName: saferoads_db
+    databaseName: saferoads_db_fv2z
     user: saferoads_user
     region: Oregon
 
